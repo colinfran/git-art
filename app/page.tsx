@@ -14,13 +14,14 @@ const Page: FC = () => {
     authenticate()
   }
   return (
-    <div className="flex min-h-screen items-start justify-center p-8 md:items-center">
-      <Card className="w-full max-w-sm">
+    <div className="flex flex-col min-h-screen items-start justify-center p-8 md:items-center">
+      <h1 className="mb-6 w-full text-center text-3xl font-bold">GitSong</h1>
+      <h3 className="mb-6 max-w-[400px] text-center ml-auto mr-auto">GitSong transforms your GitHub activity into a unique song, turning your contributions into a creative soundtrack.</h3>
+      <Card className="w-full max-w-sm ml-auto mr-auto">
         <CardHeader>
-          <CardTitle className="mb-6 text-center text-3xl font-bold">GitSong</CardTitle>
-          <CardDescription>
-            Connect your GitHub account to access amazing features and collaborate with developers
-            around the world!
+          {/* <CardTitle className="mb-6 text-center text-3xl font-bold">GitSong</CardTitle> */}
+          <CardDescription className="text-center">
+            Sign up and let GitSong compose a melody that celebrates your achievements!
           </CardDescription>
         </CardHeader>
         <CardFooter className="flex flex-col">
