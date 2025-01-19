@@ -2,7 +2,6 @@ import React, { FC, ReactNode } from "react"
 import "./globals.css"
 import { Analytics } from "@vercel/analytics/react"
 import Providers from "./providers"
-import { Session } from "next-auth"
 import { auth } from "@/lib/auth"
 
 export const metadata = {

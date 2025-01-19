@@ -2,15 +2,16 @@
 import React, { FC, useEffect, useState } from "react"
 import { useSession } from "next-auth/react"
 import { Loader2 } from "lucide-react"
+import { User } from "next-auth"
 
 const Page: FC = () => {
   const [gitData, setGitData] = useState<undefined | []>(undefined)
   const { data: session } = useSession()
   useEffect(() => {
     const getUserData = async (): Promise<void> => {
-      const user = session!.user!.login
+      const user = (session!.user! as User).login
       const email = session!.user!.email
-      const gitId = session!.user!.gitId
+      const gitId = (session!.user! as User).gitId
       const response = await fetch("/api/fetch-github-data", {
         method: "POST",
         headers: {
