@@ -24,7 +24,7 @@ export const users = pgTable("users", {
 export type SelectUser = typeof users.$inferSelect
 export const insertUserSchema = createInsertSchema(users)
 
-export const doesUserExist = async (user: User | AdapterUser): Promise<boolean|string> => {
+export const doesUserExist = async (user: User | AdapterUser): Promise<boolean | string> => {
   try {
     const existingUser = await db.select().from(users).where(eq(users.githubId, user.id!)).limit(1)
     return existingUser && existingUser.length > 0
@@ -42,7 +42,12 @@ type NewUser = {
   imageUrl: string | null
 }
 
-export const createUser = async ({ githubId, username, email, imageUrl}: NewUser): Promise<void> => {
+export const createUser = async ({
+  githubId,
+  username,
+  email,
+  imageUrl,
+}: NewUser): Promise<void> => {
   try {
     await db.insert(users).values({ githubId, username, email, imageUrl }).returning()
   } catch (error) {
