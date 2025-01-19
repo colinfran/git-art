@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import { Button } from '@/components/ui/button';
 import { auth, signOut } from '@/lib/auth';
 import Image from 'next/image';
@@ -5,13 +6,11 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
-import Link from 'next/link';
 
-export async function User() {
+const User: FC = async () => {
   let session = await auth();
   let user = session?.user;
 
@@ -51,3 +50,6 @@ export async function User() {
     </div>
   );
 }
+
+export default User
+
