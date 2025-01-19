@@ -35,8 +35,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             imageUrl: user.image || null,
           })
         }
+        return true
       }
-      return true
     },
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     async jwt({ token, user }: { token: any; user: User }) {
