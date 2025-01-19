@@ -2,7 +2,7 @@ import React, { FC, ReactNode } from "react"
 import "./globals.css"
 import { Analytics } from "@vercel/analytics/react"
 import Providers from "./providers"
-import { auth } from "@/lib/auth"
+import { Session } from "next-auth"
 
 export const metadata = {
   title: "Next.js App Router + NextAuth + Tailwind CSS",
@@ -11,11 +11,11 @@ export const metadata = {
 }
 
 type Props = {
+  session: Session | null
   children: ReactNode
 }
 
-const RootLayout: FC<Props> = async ({ children }) => {
-  const session = await auth()
+const RootLayout: FC<Props> = ({ children, session }) => {
   return (
     <html lang="en">
       <body className="flex min-h-screen w-full flex-col">

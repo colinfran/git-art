@@ -11,7 +11,7 @@ type Props = {
 
 const Providers: FC<Props> = ({ children, session }) => {
   return (
-    <SessionProvider refetchOnWindowFocus={false} session={session}>
+    <SessionProvider session={session} refetchOnWindowFocus={false}>
       <TooltipProvider>{children}</TooltipProvider>
     </SessionProvider>
   )
