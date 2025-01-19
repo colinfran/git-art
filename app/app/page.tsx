@@ -28,16 +28,16 @@ const Page: FC = () => {
   }, [session])
 
   return (
-    <div className="flex p-8 border mt-[64px]">
+    <div className="mt-[64px] flex border p-8">
       {gitData ? (
-          gitData.length > 0 ? (
-            <div>Loaded</div>
-          ) : (
-            <div>No data exists for this user</div>
-          )
+        gitData.length > 0 ? (
+          <div>Loaded</div>
         ) : (
-          <Loader2 className="mr-2 size-4 animate-spin" />
-        )}
+          <div>No data exists for this user</div>
+        )
+      ) : (
+        <Loader2 className="mr-2 size-4 animate-spin" />
+      )}
     </div>
   )
 }
