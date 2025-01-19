@@ -4,14 +4,8 @@ export default {
       {
         protocol: 'https',
         hostname: 'avatars.githubusercontent.com',
-        search: ''
+        pathname: '/u/**',
       },
-      {
-        protocol: 'https',
-        hostname: '*.public.blob.vercel-storage.com',
-        search: ''
-      }
     ],
-    domains: ['avatars.githubusercontent.com', '*.public.blob.vercel-storage.com']
   }
 };
