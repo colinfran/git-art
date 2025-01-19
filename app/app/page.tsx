@@ -6,7 +6,6 @@ import { Loader2 } from "lucide-react"
 const Page: FC = () => {
   const [gitData, setGitData] = useState<undefined | []>(undefined)
   const { data: session } = useSession()
-  console.log(session)
   useEffect(() => {
     const getUserData = async (): Promise<void> => {
       const user = session!.user!.login
@@ -20,7 +19,6 @@ const Page: FC = () => {
         body: JSON.stringify({ username: user, email, gitId }),
       })
       const data = await response.json()
-      console.log(data)
       setGitData(data.commits)
     }
     if (session?.user && session !== null) {

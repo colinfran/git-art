@@ -11,7 +11,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         console.log(profile)
         // Fetch the GitHub username (login) along with other profile data
         return {
-          id: profile.id,
+          id: profile.id.toString(),
           name: profile.name,
           email: profile.email,
           image: profile.avatar_url,
