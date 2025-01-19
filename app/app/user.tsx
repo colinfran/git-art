@@ -1,6 +1,6 @@
 import React, { FC } from "react"
 import { Button } from "@/components/ui/button"
-import { auth, signOut } from "@/lib/auth"
+import { auth } from "@/lib/auth/index"
 import Image from "next/image"
 import {
   DropdownMenu,
@@ -9,6 +9,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import LogOutButton from "@/components/log-out-button"
 
 const User: FC = async () => {
   const session = await auth()
@@ -32,14 +33,7 @@ const User: FC = async () => {
           <DropdownMenuItem>Support</DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem>
-            <form
-              action={async () => {
-                "use server"
-                await signOut({ redirectTo: "/", redirect: true })
-              }}
-            >
-              <button type="submit">Sign Out</button>
-            </form>
+            <LogOutButton />
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

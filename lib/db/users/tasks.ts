@@ -10,6 +10,7 @@ type NewUser = {
   name: string
   email: string
   imageUrl: string | null
+  gitId: string
 }
 
 export const doesUserExist = async (user: User): Promise<boolean | string> => {
@@ -27,9 +28,9 @@ export const doesUserExist = async (user: User): Promise<boolean | string> => {
 }
 
 export const createUser = async (user: NewUser): Promise<void> => {
-  const { name, username, email, imageUrl } = user
+  const { name, username, email, imageUrl, gitId } = user
   try {
-    await db.insert(users).values({ username, name, email, imageUrl }).returning()
+    await db.insert(users).values({ username, name, email, imageUrl, gitId }).returning()
   } catch (error) {
     console.error("Error creating user", error)
   }

@@ -1,6 +1,6 @@
 import NextAuth, { Session, User } from "next-auth"
 import GitHub from "next-auth/providers/github"
-import { createUser, doesUserExist } from "./db/users/tasks"
+import { createUser, doesUserExist } from "../db/users/tasks"
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-expect-error
@@ -34,6 +34,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
               name: user.name || "",
               email: user.email!,
               imageUrl: user.image || null,
+              gitId: user.gitId,
             })
           }
         } catch (error) {
