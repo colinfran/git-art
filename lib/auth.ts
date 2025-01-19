@@ -1,4 +1,4 @@
-import NextAuth, { User, Session } from "next-auth"
+import NextAuth, { User } from "next-auth"
 import GitHub from "next-auth/providers/github"
 import { createUser, doesUserExist } from "./db/users/tasks"
 
