@@ -1,20 +1,19 @@
 import { NextResponse } from 'next/server';
-// import { getToken } from 'next-auth/jwt';
 import type { NextRequest } from 'next/server';
+import { auth } from './lib/auth';
 
 export async function middleware(req: NextRequest) {
-  // const token = await getToken({ req, secret: process.env.AUTH_SECRET });
-  // const { pathname } = req.nextUrl;
+  const session = await auth();
+  const pathname = req.nextUrl.pathname;
+  // Redirect signed-in users from '/' to '/app'
+  if (pathname === '/' && session?.user) {
+    return NextResponse.redirect(new URL('/app', req.url));
+  }
 
-  // // Redirect signed-in users from '/' to '/app'
-  // if (pathname === '/' && token) {
-  //   return NextResponse.redirect(new URL('/app', req.url));
-  // }
-
-  // // Redirect unauthenticated users from '/app' to '/'
-  // if (pathname.startsWith('/app') && !token) {
-  //   return NextResponse.redirect(new URL('/', req.url));
-  // }
+  // Redirect unauthenticated users from '/app' to '/'
+  if (pathname.startsWith('/app') && !session?.user) {
+    return NextResponse.redirect(new URL('/', req.url));
+  }
 
   // Allow other routes to proceed
   return NextResponse.next();
