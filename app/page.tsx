@@ -1,7 +1,7 @@
 "use client"
 import React, { FC, useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardDescription, CardFooter, CardHeader } from "@/components/ui/card"
 import { Github, Loader2 } from "lucide-react"
 import { authenticate } from "@/lib/auth/actions"
 import Link from "next/link"
@@ -14,10 +14,13 @@ const Page: FC = () => {
     authenticate()
   }
   return (
-    <div className="flex flex-col min-h-screen items-start justify-center p-8 md:items-center">
+    <div className="flex min-h-screen flex-col items-start justify-center p-8 md:items-center">
       <h1 className="mb-6 w-full text-center text-3xl font-bold">GitSong</h1>
-      <h3 className="mb-6 max-w-[400px] text-center ml-auto mr-auto">GitSong transforms your GitHub activity into a unique song, turning your contributions into a creative soundtrack.</h3>
-      <Card className="w-full max-w-sm ml-auto mr-auto">
+      <h3 className="mx-auto mb-6 max-w-[400px] text-center">
+        GitSong transforms your GitHub activity into a unique song, turning your contributions into
+        a creative soundtrack.
+      </h3>
+      <Card className="mx-auto w-full max-w-sm">
         <CardHeader>
           {/* <CardTitle className="mb-6 text-center text-3xl font-bold">GitSong</CardTitle> */}
           <CardDescription className="text-center">
