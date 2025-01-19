@@ -2,7 +2,6 @@ import React, { FC, ReactNode } from "react"
 import "./globals.css"
 import { Analytics } from "@vercel/analytics/react"
 import Providers from "./providers"
-import { Session } from "next-auth"
 
 export const metadata = {
   title: "Next.js App Router + NextAuth + Tailwind CSS",
@@ -11,7 +10,7 @@ export const metadata = {
 }
 
 type Props = {
-  session: Session | null
+  session: any // eslint-disable-line @typescript-eslint/no-explicit-any
   children: ReactNode
 }
 
