@@ -35,7 +35,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
               email: user.email!,
               imageUrl: user.image || null,
             })
-          } 
+          }
         } catch (error) {
           return false
         }
