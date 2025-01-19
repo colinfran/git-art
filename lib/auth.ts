@@ -43,18 +43,18 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       }
     },
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    async jwt({ token, user }: { token: any; user: User }) {
-      if (user) {
-        token.user = user
-      }
-      return token
-    },
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    async session({ session, token }: { session: Session; token: any }) {
-      if (token && token.user) {
-        session.user = token.user
-      }
-      return session
-    },
+    // async jwt({ token, user }: { token: any; user: User }) {
+    //   if (user) {
+    //     token.user = user
+    //   }
+    //   return token
+    // },
+    // // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // async session({ session, token }: { session: Session; token: any }) {
+    //   if (token && token.user) {
+    //     session.user = token.user
+    //   }
+    //   return session
+    // },
   },
 })
