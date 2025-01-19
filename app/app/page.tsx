@@ -28,9 +28,8 @@ const Page: FC = () => {
   }, [session])
 
   return (
-    <div>
-      <div>
-        {gitData ? (
+    <div className="flex p-8 border mt-[64px]">
+      {gitData ? (
           gitData.length > 0 ? (
             <div>Loaded</div>
           ) : (
@@ -39,7 +38,6 @@ const Page: FC = () => {
         ) : (
           <Loader2 className="mr-2 size-4 animate-spin" />
         )}
-      </div>
     </div>
   )
 }
