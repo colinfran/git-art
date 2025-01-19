@@ -28,7 +28,7 @@ const Page: FC = () => {
   }, [session])
 
   return (
-    <div className="mt-[64px] flex border p-8">
+    <div className="mt-[72px] flex border p-8 ml-[2px] mr-[2px]">
       {gitData ? (
         gitData.length > 0 ? (
           <div>Loaded</div>
