@@ -4,7 +4,6 @@ import { Analytics } from "@vercel/analytics/react"
 import Providers from "./providers"
 import { auth } from "@/lib/auth/index"
 import { Logo } from "@/components/logo"
-import User from "../components/header-dropdown"
 import HeaderDropdown from "../components/header-dropdown"
 
 export const metadata = {
