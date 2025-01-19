@@ -4,7 +4,8 @@ import { Analytics } from "@vercel/analytics/react"
 import Providers from "./providers"
 import { auth } from "@/lib/auth/index"
 import { Logo } from "@/components/logo"
-import User from "./app/user"
+import User from "../components/header-dropdown"
+import HeaderDropdown from "../components/header-dropdown"
 
 export const metadata = {
   title: "Next.js App Router + NextAuth + Tailwind CSS",
@@ -24,7 +25,7 @@ const RootLayout: FC<Props> = async ({ children }) => {
             <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
               <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
                 <Logo />
-                {session?.user && <User />}
+                {session?.user && <HeaderDropdown />}
               </header>
               <main className="grid flex-1 items-start gap-2 bg-muted/40 p-4 sm:px-6 sm:py-0 md:gap-4">
                 {children}

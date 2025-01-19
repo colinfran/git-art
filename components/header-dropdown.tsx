@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import LogOutButton from "@/components/log-out-button"
 
-const User: FC = async () => {
+const HeaderDropdown: FC = async () => {
   const session = await auth()
   const user = session?.user
   return (
@@ -41,4 +41,4 @@ const User: FC = async () => {
   )
 }
 
-export default User
+export default HeaderDropdown
