@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from "react"
+import React, { FC } from "react"
 import "./globals.css"
 import { Analytics } from "@vercel/analytics/react"
 import Providers from "./providers"
@@ -9,12 +9,9 @@ export const metadata = {
     "A user admin dashboard configured with Next.js, Postgres, NextAuth, Tailwind CSS, TypeScript, and Prettier.",
 }
 
-type Props = {
-  session: any // eslint-disable-line @typescript-eslint/no-explicit-any
-  children: ReactNode
-}
+type Props = any // eslint-disable-line @typescript-eslint/no-explicit-any
 
-const RootLayout: FC<Props> = ({ children, session }) => {
+const RootLayout: FC<Props> = async ({ children, session }) => {
   return (
     <html lang="en">
       <body className="flex min-h-screen w-full flex-col">
