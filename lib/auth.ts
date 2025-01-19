@@ -7,8 +7,6 @@ import { createUser, doesUserExist } from "./db/users/tasks"
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
     GitHub({
-      clientId: process.env.GITHUB_CLIENT_ID,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET,
       async profile(profile) {
         // Fetch the GitHub username (login) along with other profile data
         return {
