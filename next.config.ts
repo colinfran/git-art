@@ -11,6 +11,7 @@ export default {
         hostname: '*.public.blob.vercel-storage.com',
         search: ''
       }
-    ]
+    ],
+    domains: ['avatars.githubusercontent.com', '*.public.blob.vercel-storage.com']
   }
 };

@@ -23,7 +23,7 @@ export default function LoginPage() {
             action={async () => {
               'use server';
               await signIn('github', {
-                redirectTo: '/'
+                redirectTo: '/app'
               });
             }}
             className="w-full"
