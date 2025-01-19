@@ -12,7 +12,6 @@ export const metadata = {
 }
 
 type Props = {
-  session: Session | null
   children: ReactNode
 }
 
