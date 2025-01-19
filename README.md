@@ -1,6 +1,6 @@
-# GitSong
+# GitSongs
 
-GitSong is a unique web application that turns your GitHub history into music. By analyzing your GitHub activity, GitSong generates personalized songs based on your coding contributions.
+GitSongs is a unique web application that turns your GitHub history into music. By analyzing your GitHub activity, GitSongs generates personalized songs based on your coding contributions.
 
 
 ## Technologies Used
@@ -18,7 +18,7 @@ GitSong is a unique web application that turns your GitHub history into music. B
 
 ## Installation
 
-To run GitSong locally, follow these steps:
+To run GitSongs locally, follow these steps:
 
 1. Clone the repository:
 
