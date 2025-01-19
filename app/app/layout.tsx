@@ -1,9 +1,9 @@
-import { FC, ReactNode } from 'react';
-import User from './user';
-import { Logo } from '@/components/logo';
+import React, { FC, ReactNode } from "react"
+import User from "./user"
+import { Logo } from "@/components/logo"
 
 type Props = {
-  children: ReactNode;
+  children: ReactNode
 }
 
 const Layout: FC<Props> = ({ children }) => {
@@ -14,14 +14,12 @@ const Layout: FC<Props> = ({ children }) => {
           <Logo />
           <User />
         </header>
-        <main className="grid flex-1 items-start gap-2 p-4 sm:px-6 sm:py-0 md:gap-4 bg-muted/40">
+        <main className="grid flex-1 items-start gap-2 bg-muted/40 p-4 sm:px-6 sm:py-0 md:gap-4">
           {children}
         </main>
       </div>
     </main>
-  );
+  )
 }
 
 export default Layout
-
-

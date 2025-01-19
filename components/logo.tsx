@@ -1,12 +1,11 @@
+import React, { FC } from "react"
 import Link from "next/link"
-import { FC } from "react"
-import { Logo as VercelLogo } from '@/components/icons';
-import { auth } from "@/lib/auth";
+import { Logo as VercelLogo } from "@/components/icons"
+import { auth } from "@/lib/auth"
 
-
-export const Logo:FC = async () => {
-  let session = await auth();
-  let user = session?.user;
+export const Logo: FC = async () => {
+  const session = await auth()
+  const user = session?.user
 
   return (
     <Link href={user ? "/app" : "/"}>
