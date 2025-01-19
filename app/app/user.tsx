@@ -24,6 +24,7 @@ const User: FC = async () => {
               height={36}
               src={user?.image ?? "/placeholder-user.jpg"}
               width={36}
+              priority
             />
           </Button>
         </DropdownMenuTrigger>

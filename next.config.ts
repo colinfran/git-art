@@ -1,4 +1,8 @@
 export default {
+  reactStrictMode: false,
+  devIndicators: {
+
+  },
   images: {
     remotePatterns: [
       {
