@@ -1,4 +1,4 @@
-import NextAuth from "next-auth"
+import NextAuth, { User, Session } from "next-auth"
 import GitHub from "next-auth/providers/github"
 import { createUser, doesUserExist } from "./db/users/tasks"
 
@@ -22,32 +22,32 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     }),
   ],
   callbacks: {
-    async signIn({ user }) {
-      console.log("User", user)
+    async signIn({ user }: { user: User }) {
       if (user) {
         const exists = await doesUserExist(user)
         if (exists === "error") {
-          return false // Prevent sign-in if error
+          return false
         }
         if (!exists) {
-          const username = (user as { login?: string }).login
           await createUser({
-            username: username || "",
+            username: user.login || "",
             name: user.name || "",
             email: user.email!,
             imageUrl: user.image || null,
           })
         }
       }
-      return true // Allow sign-in
+      return true
     },
-    async jwt({ token, user }) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    async jwt({ token, user }: { token: any; user: User }) {
       if (user) {
         token.user = user
       }
       return token
     },
-    async session({ session, token }) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    async session({ session, token }: { session: Session; token: any }) {
       if (token && token.user) {
         session.user = token.user
       }
