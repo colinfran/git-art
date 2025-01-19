@@ -91,15 +91,19 @@ export const Spinner: FC = () => {
   )
 }
 
-export const Logo: FC = () => {
+type LogoProps = {
+  size?: string;
+}
+
+export const Logo: FC<LogoProps> = ({ size="32px"}) => {
   return (
     <svg
       fill="#000000"
-      height="32px"
+      height={size}
       id="Capa_1"
       version="1.1"
       viewBox="0 0 275.725 275.725"
-      width="32px"
+      width={size}
     >
       <g>
         <path

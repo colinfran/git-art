@@ -5,6 +5,7 @@ import { Card, CardDescription, CardFooter, CardHeader } from "@/components/ui/c
 import { Github, Loader2 } from "lucide-react"
 import { authenticate } from "@/lib/auth/actions"
 import Link from "next/link"
+import { Logo } from "@/components/icons"
 
 const Page: FC = () => {
   const [loading, setLoading] = useState(false)
@@ -14,7 +15,10 @@ const Page: FC = () => {
     authenticate()
   }
   return (
-    <div className="mx-[2px] flex min-h-screen flex-col items-start justify-center p-8 md:items-center">
+    <div className="mx-[2px] flex flex-col items-start p-8 md:items-center">
+      <div className="w-full flex justify-center">
+        <Logo size="108px" />
+      </div>
       <h1 className="mb-6 w-full text-center text-3xl font-bold">GitSongs</h1>
       <h3 className="mx-auto mb-6 max-w-[400px] text-center">
         GitSongs transforms your GitHub activity into a unique song, turning your contributions into

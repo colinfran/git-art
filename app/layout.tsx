@@ -26,7 +26,7 @@ const RootLayout: FC<Props> = async ({ children }) => {
                 <Logo />
                 {session?.user && <HeaderDropdown />}
               </header>
-              <main className="mt-[-72x] grid flex-1 items-start gap-2 md:gap-4">{children}</main>
+              <main className="grid flex-1 items-start gap-2 md:gap-4">{children}</main>
             </div>
           </main>
         </Providers>
