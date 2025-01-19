@@ -23,17 +23,21 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   callbacks: {
     async signIn({ user }: { user: User }) {
       if (user) {
-        const exists = await doesUserExist(user)
-        if (exists === "error") {
+        try {
+          const exists = await doesUserExist(user)
+          if (exists === "error") {
+            throw new Error()
+          }
+          if (!exists) {
+            await createUser({
+              username: user.login || "",
+              name: user.name || "",
+              email: user.email!,
+              imageUrl: user.image || null,
+            })
+          } 
+        } catch (error) {
           return false
-        }
-        if (!exists) {
-          await createUser({
-            username: user.login || "",
-            name: user.name || "",
-            email: user.email!,
-            imageUrl: user.image || null,
-          })
         }
         return true
       }
