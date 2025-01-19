@@ -14,7 +14,7 @@ const Page: FC = () => {
     authenticate()
   }
   return (
-    <div className="flex min-h-screen flex-col items-start justify-center p-8 md:items-center ml-[2px] mr-[2px]">
+    <div className="mx-[2px] flex min-h-screen flex-col items-start justify-center p-8 md:items-center">
       <h1 className="mb-6 w-full text-center text-3xl font-bold">GitSongs</h1>
       <h3 className="mx-auto mb-6 max-w-[400px] text-center">
         GitSongs transforms your GitHub activity into a unique song, turning your contributions into
