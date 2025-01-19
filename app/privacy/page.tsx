@@ -10,7 +10,7 @@ const Page: FC = async () => {
         <section className="mb-8">
           <h2 className="mb-4 text-2xl font-semibold">1. Information We Collect</h2>
           <p>
-            At GitSong, we prioritize your privacy. We collect minimal information to provide the
+            At GitSongs, we prioritize your privacy. We collect minimal information to provide the
             best experience and improve our service. The types of information we collect are as
             follows:
           </p>
@@ -86,8 +86,8 @@ const Page: FC = async () => {
           </p>
           <p>
             Email:{" "}
-            <a className="text-blue-300 hover:text-blue-100" href="mailto:support@gitsong.com">
-              support@gitsong.com
+            <a className="text-blue-300 hover:text-blue-100" href="mailto:support@gitsongs.com">
+              support@gitsongs.com
             </a>
           </p>
         </section>
@@ -95,7 +95,7 @@ const Page: FC = async () => {
 
       <footer className="p-4 text-black">
         <div className="container mx-auto text-center">
-          <p>&copy; {new Date().getFullYear()} GitSong. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} GitSongs. All rights reserved.</p>
           <Link className="text-gray-600 hover:text-gray-500" href="/">
             Back to Home
           </Link>

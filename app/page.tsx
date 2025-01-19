@@ -15,16 +15,15 @@ const Page: FC = () => {
   }
   return (
     <div className="flex min-h-screen flex-col items-start justify-center p-8 md:items-center">
-      <h1 className="mb-6 w-full text-center text-3xl font-bold">GitSong</h1>
+      <h1 className="mb-6 w-full text-center text-3xl font-bold">GitSongs</h1>
       <h3 className="mx-auto mb-6 max-w-[400px] text-center">
-        GitSong transforms your GitHub activity into a unique song, turning your contributions into
+        GitSongs transforms your GitHub activity into a unique song, turning your contributions into
         a creative soundtrack.
       </h3>
       <Card className="mx-auto w-full max-w-sm">
         <CardHeader>
-          {/* <CardTitle className="mb-6 text-center text-3xl font-bold">GitSong</CardTitle> */}
           <CardDescription className="text-center">
-            Sign up and let GitSong compose a melody that celebrates your achievements!
+            Sign up and let GitSongs compose a melody that celebrates your achievements!
           </CardDescription>
         </CardHeader>
         <CardFooter className="flex flex-col">
