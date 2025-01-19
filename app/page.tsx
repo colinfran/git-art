@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button';
+
 import {
   Card,
   CardDescription,
@@ -7,8 +8,9 @@ import {
   CardTitle
 } from '@/components/ui/card';
 import { signIn } from '@/lib/auth';
+import { FC } from 'react';
 
-export default function LoginPage() {
+const Page: FC = () => {
   return (
     <div className="min-h-screen flex justify-center items-start md:items-center p-8">
       <Card className="w-full max-w-sm">
@@ -35,3 +37,5 @@ export default function LoginPage() {
     </div>
   );
 }
+
+export default Page;

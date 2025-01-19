@@ -13,7 +13,6 @@ import {
 const User: FC = async () => {
   let session = await auth();
   let user = session?.user;
-
   return (
     <div className='w-full flex justify-end'>
       <DropdownMenu>
