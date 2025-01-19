@@ -92,10 +92,10 @@ export const Spinner: FC = () => {
 }
 
 type LogoProps = {
-  size?: string;
+  size?: string
 }
 
-export const Logo: FC<LogoProps> = ({ size="32px"}) => {
+export const Logo: FC<LogoProps> = ({ size = "32px" }) => {
   return (
     <svg
       fill="#000000"

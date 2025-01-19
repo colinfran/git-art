@@ -16,7 +16,7 @@ const Page: FC = () => {
   }
   return (
     <div className="mx-[2px] flex flex-col items-start p-8 md:items-center">
-      <div className="w-full flex justify-center">
+      <div className="flex w-full justify-center">
         <Logo size="108px" />
       </div>
       <h1 className="mb-6 w-full text-center text-3xl font-bold">GitSongs</h1>
