@@ -2,6 +2,16 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { auth } from './lib/auth';
 
+
+const isAuthenticatedRoute = (pathname: string): boolean => {
+  const authenticatedRoutes = [
+    "/home",
+    "/images",
+    "/generate"
+  ]
+  return authenticatedRoutes.some((route)=> pathname.startsWith(route) )
+}
+
 export async function middleware(req: NextRequest) {
   const session = await auth();
   const pathname = req.nextUrl.pathname;
@@ -11,7 +21,7 @@ export async function middleware(req: NextRequest) {
   }
 
   // Redirect unauthenticated users to '/'
-  if ((pathname.startsWith('/home') || pathname.startsWith('/images')) && !session?.user) {
+  if (isAuthenticatedRoute(pathname) && !session?.user) {
     return NextResponse.redirect(new URL('/', req.url));
   }
   // Allow other routes to proceed
