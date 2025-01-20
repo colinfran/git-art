@@ -1,8 +1,8 @@
 import { db } from "@/lib/db"
-import { and, eq, gte, lt } from "drizzle-orm"
+import { and, desc, eq, gte, lt } from "drizzle-orm"
 import { images } from "./table"
 
-export const hasUserCreatedImageToday = async (userId: string): Promise<boolean> => {
+export const hasUserCreatedImageToday = async (gitId: string): Promise<boolean> => {
   const today = new Date()
   const startOfDay = new Date(today.setHours(0, 0, 0, 0))
   const endOfDay = new Date(today.setHours(23, 59, 59, 999))
@@ -11,7 +11,7 @@ export const hasUserCreatedImageToday = async (userId: string): Promise<boolean>
     .from(images)
     .where(
       and(
-        eq(images.gitId, userId),
+        eq(images.gitId, gitId),
         gte(images.createdAt, startOfDay),
         lt(images.createdAt, endOfDay),
       ),
@@ -35,14 +35,21 @@ export const addImage = async (gitId: string, imageUrl: string): Promise<void> =
 }
 
 export const getImages = async (gitId: string): Promise<string[]> => {
-  console.log(gitId)
-  // get all user images from image table
-  // const response = await db
-  //   .select()
-  //   .from(images)
-  //   .where(
-  //     eq(images.gitId, gitId)
-  //   )
-  // return response.length > 0
-  return ["/placeholder.svg", "/placeholder.svg", "/placeholder.svg"]
+  const response = await db
+    .select({ imageUrl: images.imageUrl })
+    .from(images)
+    .where(eq(images.gitId, gitId))
+  const imageUrls = response.map((row) => row.imageUrl)
+  return imageUrls
+}
+
+export const getRecentImages = async (gitId: string): Promise<string[]> => {
+  const response = await db
+    .select({ imageUrl: images.imageUrl })
+    .from(images)
+    .where(eq(images.gitId, gitId))
+    .orderBy(desc(images.createdAt))
+    .limit(3)
+  const imageUrls = response.map((row) => row.imageUrl)
+  return imageUrls
 }

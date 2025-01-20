@@ -1,8 +1,11 @@
 "use client"
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
+
 import React, { FC, useEffect, useState } from "react"
 import { Skeleton } from "@/components/ui/skeleton"
-
+import { useSession } from "next-auth/react"
 const Page: FC = () => {
+  const { data: session } = useSession()
   const [imageData, setImageData] = useState<{ url: string; alreadyGenerated: boolean } | null>(
     null,
   )
@@ -10,9 +13,23 @@ const Page: FC = () => {
   useEffect(() => {
     async function loadImage(): Promise<void> {
       try {
-        // const data = await generateImage()
-        await new Promise((resolve) => setTimeout(resolve, 3000))
-        setImageData({ url: "/placeholder.svg", alreadyGenerated: false })
+        const response = await fetch("/api/get-image", {
+          method: "POST",
+          body: JSON.stringify({
+            gitId: session?.user!.gitId!,
+            username: session?.user!.login!,
+            email: session?.user!.email!,
+          }),
+        })
+        const result = await response.json()
+        if (result?.image.data[0].url) {
+          setImageData({ url: result.image.data[0].url, alreadyGenerated: false })
+        }
+        if (result?.alreadyGenerated) {
+          setImageData({ url: "", alreadyGenerated: true })
+        }
+        // await new Promise((resolve) => setTimeout(resolve, 3000))
+        // setImageData({ url: "/placeholder.svg", alreadyGenerated: false })
       } catch (error) {
         console.error("Failed to generate image:", error)
         // Handle error (e.g., show an error message to the user)
@@ -21,8 +38,10 @@ const Page: FC = () => {
       }
     }
 
-    loadImage()
-  }, [])
+    if (session?.user) {
+      loadImage()
+    }
+  }, [session])
 
   return (
     <div className="mx-[2px] mt-2 flex flex-col items-center justify-center gap-8 p-8">

@@ -6,6 +6,11 @@ export default {
         hostname: 'avatars.githubusercontent.com',
         pathname: '/u/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'oaidalleapiprodscus.blob.core.windows.net',
+        pathname: '**',
+      }
     ],
   }
 };
