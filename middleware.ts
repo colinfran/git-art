@@ -10,11 +10,10 @@ export async function middleware(req: NextRequest) {
     return NextResponse.redirect(new URL('/app', req.url));
   }
 
-  // Redirect unauthenticated users from '/app' to '/'
-  if (pathname.startsWith('/app') && !session?.user) {
+  // Redirect unauthenticated users to '/'
+  if ((pathname.startsWith('/home') || pathname.startsWith('/images')) && !session?.user) {
     return NextResponse.redirect(new URL('/', req.url));
   }
-
   // Allow other routes to proceed
   return NextResponse.next();
 }

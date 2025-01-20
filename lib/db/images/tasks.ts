@@ -21,11 +21,11 @@ export const hasUserCreatedImageToday = async (userId: string): Promise<boolean>
   return response.length > 0
 }
 
-export const addImage = async (userId: string, imageUrl: string): Promise<void> => {
+export const addImage = async (gitId: string, imageUrl: string): Promise<void> => {
   try {
     const createdAt = new Date()
     await db.insert(images).values({
-      userId,
+      gitId,
       imageUrl,
       createdAt,
     })
