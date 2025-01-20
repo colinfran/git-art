@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import LogOutButton from "@/components/log-out-button"
 import Link from "next/link"
+import { HandHeart } from "lucide-react"
 
 const HeaderDropdown: FC = async () => {
   const session = await auth()
@@ -31,9 +32,15 @@ const HeaderDropdown: FC = async () => {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <Link href="https://github.com/sponsors/colinfran">
-            <DropdownMenuItem>Sponsor</DropdownMenuItem>
-          </Link>
+          <DropdownMenuItem
+            className="flex w-full cursor-pointer flex-row items-center gap-2"
+            asChild
+          >
+            <Link href="https://github.com/sponsors/colinfran">
+              <HandHeart size={16} />
+              <span>Sponsor</span>
+            </Link>
+          </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem>
             <LogOutButton />

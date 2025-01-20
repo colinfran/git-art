@@ -1,6 +1,6 @@
-# GitSongs
+# GitArt
 
-GitSongs is a unique web application that turns your GitHub history into music. By analyzing your GitHub activity, GitSongs generates personalized songs based on your coding contributions.
+GitArt is a one-of-a-kind web application that transforms your GitHub history into visual art. By analyzing your GitHub activity, GitArt generates personalized artwork based on your coding contributions, making your development journey a piece of art.
 
 
 ## Technologies Used
@@ -18,7 +18,7 @@ GitSongs is a unique web application that turns your GitHub history into music. 
 
 ## Installation
 
-To run GitSongs locally, follow these steps:
+To run GitArt locally, follow these steps:
 
 1. Clone the repository:
 
@@ -49,4 +49,4 @@ To run GitSongs locally, follow these steps:
    npm run dev
    ```
 
-6. Open your browser and visit `http://localhost:3000` to access GitSong.
+6. Open your browser and visit `http://localhost:3000` to access GitArt.

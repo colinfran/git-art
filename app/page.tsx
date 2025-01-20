@@ -17,17 +17,18 @@ const Page: FC = () => {
   return (
     <div className="mx-[2px] flex flex-col items-start p-8 md:items-center">
       <div className="flex w-full justify-center">
-        <Logo size="108px" />
+        <Logo size={108} />
       </div>
-      <h1 className="mb-6 w-full text-center text-3xl font-bold">GitSongs</h1>
+      <h1 className="mb-6 w-full text-center text-3xl font-bold">GitArt</h1>
       <h3 className="mx-auto mb-6 max-w-[400px] text-center">
-        GitSongs transforms your GitHub activity into a unique song, turning your contributions into
-        a creative soundtrack.
+        GitArt transforms your GitHub activity into a visual masterpiece, turning your coding
+        contributions into captivating artwork.
       </h3>
       <Card className="mx-auto w-full max-w-sm">
         <CardHeader>
           <CardDescription className="text-center">
-            Sign up and let GitSongs compose a melody that celebrates your achievements!
+            Sign up and let GitArt create a visual masterpiece that celebrates your coding
+            achievements!
           </CardDescription>
         </CardHeader>
         <CardFooter className="flex flex-col">

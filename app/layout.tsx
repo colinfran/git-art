@@ -22,7 +22,7 @@ const RootLayout: FC<Props> = async ({ children }) => {
         <Providers session={session}>
           <main className="flex min-h-screen w-full flex-col">
             <div className="flex flex-col sm:gap-4 sm:px-7 sm:py-4">
-              <header className="sticky top-0 z-30 flex h-[50px] items-center gap-4 border-b bg-background px-4 y-2 sm:static sm:border-0 sm:bg-transparent sm:px-6">
+              <header className="sticky top-0 z-30 flex h-[50px] items-center gap-4 border-b bg-background px-4 sm:static sm:border-0 sm:bg-transparent sm:px-6">
                 <Logo />
                 {session?.user && <HeaderDropdown />}
               </header>
