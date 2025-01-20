@@ -5,6 +5,7 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import Link from "next/link"
+import ZoomableImage from "./zoomable-image"
 
 const ITEMS_PER_PAGE = 6
 
@@ -41,11 +42,10 @@ const ImageGridPagination: FC<Props> = ({ images }) => {
           )}
           {visibleImages.map((image, index) => (
             <div className="relative aspect-square" key={`${image}-${index}`}>
-              <Image
+              <ZoomableImage
                 alt={`Generated image ${image}`}
                 className="rounded-md object-cover"
                 src={image || "/placeholder.svg"}
-                fill
               />
             </div>
           ))}

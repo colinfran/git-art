@@ -20,14 +20,7 @@ const ImageGrid: FC<Props> = ({ images }) => {
                 alt={`Generated image ${index + 1}`}
                 className="rounded-md object-cover"
                 src={src || "/placeholder.svg"}
-                fill
               />
-              {/* <Image
-                alt={`Generated image ${index + 1}`}
-                className="rounded-md object-cover"
-                src={src || "/placeholder.svg"}
-                fill
-              /> */}
             </div>
           ))}
         </div>
