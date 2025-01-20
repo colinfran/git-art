@@ -9,7 +9,7 @@ export const Logo: FC = async () => {
 
   return (
     <Link href={user ? "/app" : "/"}>
-      <Icon />
+      <Icon size="40px"/>
     </Link>
   )
 }
