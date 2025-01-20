@@ -6,7 +6,6 @@ const Page: FC = async () => {
     <div className="flex min-h-screen flex-col">
       <main className="container mx-auto grow px-4 py-8">
         <h1 className="mb-6 text-center text-3xl font-bold">Terms and Conditions</h1>
-
         <section className="mb-8">
           <h2 className="mb-4 text-2xl font-semibold">1. Acceptance of Terms</h2>
           <p>

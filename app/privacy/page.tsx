@@ -86,8 +86,8 @@ const Page: FC = async () => {
           </p>
           <p>
             Email:{" "}
-            <a className="text-blue-300 hover:text-blue-100" href="mailto:support@GitArt.com">
-              support@GitArt.com
+            <a className="text-blue-300 hover:text-blue-100" href="mailto:hello@colinfran.com?subject=GitArt+Support">
+              hello@colinfran.com
             </a>
           </p>
         </section>
