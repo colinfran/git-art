@@ -7,9 +7,9 @@ import { Logo } from "@/components/logo"
 import HeaderDropdown from "../components/header-dropdown"
 
 export const metadata = {
-  title: "Next.js App Router + NextAuth + Tailwind CSS",
+  title: "Git Song | Git Commits -> Music",
   description:
-    "A user admin dashboard configured with Next.js, Postgres, NextAuth, Tailwind CSS, TypeScript, and Prettier.",
+    "Discover and visualize your GitHub contributions in a musical way. Git Song transforms your GitHub activity into a unique auditory experience.",
 }
 
 type Props = any // eslint-disable-line @typescript-eslint/no-explicit-any
