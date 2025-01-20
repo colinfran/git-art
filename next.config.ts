@@ -1,4 +1,5 @@
 export default {
+  reactStrictMode: false,
   images: {
     remotePatterns: [
       {
@@ -6,11 +7,12 @@ export default {
         hostname: 'avatars.githubusercontent.com',
         pathname: '/u/**',
       },
+
       {
-        protocol: 'https',
-        hostname: 'oaidalleapiprodscus.blob.core.windows.net',
-        pathname: '**',
-      }
+        protocol: "https",
+        hostname: "utfs.io",
+        pathname: "/f/*",
+      },
     ],
   }
 };

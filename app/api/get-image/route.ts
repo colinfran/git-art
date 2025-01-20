@@ -1,5 +1,6 @@
 import { addImage, hasUserCreatedImageToday } from "@/lib/db/images/tasks"
 import { fetchCommitsForUser } from "@/lib/git/tasks"
+import { uploadImage } from "@/lib/images/task"
 import { createImage, createPrompt } from "@/lib/openai/tasks"
 import { NextRequest, NextResponse } from "next/server"
 
@@ -15,7 +16,8 @@ export const POST = async (req: NextRequest): Promise<NextResponse> => {
   const prompt = createPrompt(commits)
   // generate new image
   const image = await createImage(prompt)
+  const url = await uploadImage(image.data[0].url)
   // add image to db
-  await addImage(data.gitId, image.data[0].url)
+  if (url) await addImage(data.gitId, url)
   return NextResponse.json({ image: image })
 }
