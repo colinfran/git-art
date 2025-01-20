@@ -3,10 +3,10 @@ import Image from "next/image"
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card"
 
 type Props = {
-  images: string[];
+  images: string[]
 }
 
-const ImageGrid: FC<Props> = ({images}) => {
+const ImageGrid: FC<Props> = ({ images }) => {
   return (
     <Card className="w-full max-w-[900px]">
       <CardHeader>
