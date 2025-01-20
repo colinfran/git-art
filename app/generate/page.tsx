@@ -52,9 +52,8 @@ const Page: FC = () => {
             {imageData.alreadyGenerated ? (
               <div className="text-center">
                 You have already generated a GitArt image today.
-                <br/>
-                Please wait until tomorrow and try
-                again.
+                <br />
+                Please wait until tomorrow and try again.
               </div>
             ) : (
               // eslint-disable-next-line @next/next/no-img-element
