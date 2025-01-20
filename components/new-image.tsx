@@ -1,6 +1,7 @@
 import React, { FC } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card"
 import { Button } from "./ui/button"
+import Link from "next/link"
 
 const NewImage: FC = () => {
   const alreadyGeneratedToday = false
@@ -21,16 +22,8 @@ const NewImage: FC = () => {
       </CardHeader>
       <CardContent className="flex items-center justify-center">
         {!alreadyGeneratedToday && (
-          <Button /*onClick={handleGenerate} disabled={isGenerating}*/>
-            {/* {isGenerating ? (
-            <>
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              Generating...
-            </>
-          ) : (
-            "Generate Random Image"
-          )} */}
-            {"Generate"}
+          <Button asChild /*onClick={handleGenerate} disabled={isGenerating}*/>
+            <Link href="/generate">{"Generate"}</Link>
           </Button>
         )}
       </CardContent>

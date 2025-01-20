@@ -44,9 +44,5 @@ export const getImages = async (gitId: string): Promise<string[]> => {
   //     eq(images.gitId, gitId)
   //   )
   // return response.length > 0
-  return [
-    "/placeholder.svg?height=100&width=100",
-    "/placeholder.svg?height=100&width=100",
-    "/placeholder.svg?height=100&width=100",
-  ]
+  return ["/placeholder.svg", "/placeholder.svg", "/placeholder.svg"]
 }

@@ -4,6 +4,7 @@ import React, { FC, useState } from "react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight } from "lucide-react"
+import Link from "next/link"
 
 const ITEMS_PER_PAGE = 6
 
@@ -21,7 +22,9 @@ const ImageGridPagination: FC<Props> = ({ images }) => {
     <div className="space-y-4">
       {visibleImages.length === 0 && (
         <div className="text-center">
-          <Button>Generate your first image</Button>
+          <Button asChild>
+            <Link href="/generate">Generate your first image</Link>
+          </Button>
         </div>
       )}
       <div className={visibleImages.length === 0 ? "!mt-[-40px]" : ""}>
