@@ -24,13 +24,13 @@ To run GitArt locally, follow these steps:
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/colinfran/git-song.git
+   git clone https://github.com/colinfran/git-art.git
    ```
 
 2. Navigate to the project directory:
 
    ```bash
-   cd git-song
+   cd git-art
    ```
 
 3. Install dependencies:

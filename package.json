@@ -1,5 +1,5 @@
 {
-  "name": "git-song",
+  "name": "git-art",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
