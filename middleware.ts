@@ -7,7 +7,7 @@ export async function middleware(req: NextRequest) {
   const pathname = req.nextUrl.pathname;
   // Redirect signed-in users from '/' to '/app'
   if (pathname === '/' && session?.user) {
-    return NextResponse.redirect(new URL('/app', req.url));
+    return NextResponse.redirect(new URL('/home', req.url));
   }
 
   // Redirect unauthenticated users to '/'

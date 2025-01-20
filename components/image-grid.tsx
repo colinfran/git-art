@@ -2,14 +2,11 @@ import React, { FC } from "react"
 import Image from "next/image"
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card"
 
-const ImageGrid: FC = () => {
-  // This would typically come from an API or database
-  const images = [
-    "/placeholder.svg?height=100&width=100",
-    "/placeholder.svg?height=100&width=100",
-    "/placeholder.svg?height=100&width=100",
-  ]
+type Props = {
+  images: string[];
+}
 
+const ImageGrid: FC<Props> = ({images}) => {
   return (
     <Card className="w-full max-w-[900px]">
       <CardHeader>

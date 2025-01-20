@@ -3,9 +3,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/
 import { Button } from "./ui/button"
 import Link from "next/link"
 
-const NewImage: FC = () => {
-  const alreadyGeneratedToday = false
+type Props = {
+  alreadyGeneratedToday: boolean
+}
 
+const NewImage: FC<Props> = async ({ alreadyGeneratedToday }) => {
   return (
     <Card className="w-full max-w-[900px]">
       <CardHeader>
