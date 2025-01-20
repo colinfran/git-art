@@ -21,13 +21,13 @@ const ZoomableImage: FC<ImageProps> = ({ src, alt, className, ...props }) => {
           width={500}
         />
       </DialogTrigger>
-      <DialogContent className="max-w-7xl border-0 bg-transparent p-0">
+      <DialogContent className="max-w-7xl border-0 bg-transparent p-0 shadow-none">
         <DialogTitle className="sr-only">Image</DialogTitle>
-        <div className="relative flex text-clip rounded-md bg-transparent shadow-md">
+        <div className="relative flex text-clip rounded-md bg-transparent">
           <Image
             {...props}
             alt={alt || ""}
-            className={"m-auto w-full max-w-[500px]"}
+            className={"m-auto w-full max-w-[500px] p-4 sm:p-0"}
             height={100}
             sizes="100vw"
             src={src}
