@@ -39,6 +39,8 @@ export const getImages = async (gitId: string): Promise<string[]> => {
     .select({ imageUrl: images.imageUrl })
     .from(images)
     .where(eq(images.gitId, gitId))
+    .orderBy(desc(images.createdAt))
+
   const imageUrls = response.map((row) => row.imageUrl)
   return imageUrls
 }
