@@ -8,7 +8,7 @@ export const Logo: FC = async () => {
   const user = session?.user
 
   return (
-    <Link href={user ? "/app" : "/"}>
+    <Link href={user ? "/home" : "/"}>
       <Icon size={40} />
     </Link>
   )

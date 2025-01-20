@@ -8,9 +8,6 @@ const ImageGrid: FC = () => {
     "/placeholder.svg?height=100&width=100",
     "/placeholder.svg?height=100&width=100",
     "/placeholder.svg?height=100&width=100",
-    "/placeholder.svg?height=100&width=100",
-    "/placeholder.svg?height=100&width=100",
-    "/placeholder.svg?height=100&width=100",
   ]
 
   return (

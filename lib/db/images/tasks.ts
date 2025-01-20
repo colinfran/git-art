@@ -33,3 +33,20 @@ export const addImage = async (userId: string, imageUrl: string): Promise<void> 
     console.error(error)
   }
 }
+
+export const getImages = async (gitId: string): Promise<string[]> => {
+  console.log(gitId)
+  // get all user images from image table
+  // const response = await db
+  //   .select()
+  //   .from(images)
+  //   .where(
+  //     eq(images.gitId, gitId)
+  //   )
+  // return response.length > 0
+  return [
+    "/placeholder.svg?height=100&width=100",
+    "/placeholder.svg?height=100&width=100",
+    "/placeholder.svg?height=100&width=100",
+  ]
+}

@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import LogOutButton from "@/components/log-out-button"
 import Link from "next/link"
-import { HandHeart } from "lucide-react"
+import { HandHeart, ImageIcon } from "lucide-react"
 
 const HeaderDropdown: FC = async () => {
   const session = await auth()
@@ -32,6 +32,15 @@ const HeaderDropdown: FC = async () => {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
+          <DropdownMenuItem
+            className="flex w-full cursor-pointer flex-row items-center gap-2"
+            asChild
+          >
+            <Link href="/images" prefetch>
+              <ImageIcon size={16} />
+              <span>My Images</span>
+            </Link>
+          </DropdownMenuItem>
           <DropdownMenuItem
             className="flex w-full cursor-pointer flex-row items-center gap-2"
             asChild

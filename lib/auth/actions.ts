@@ -2,7 +2,7 @@
 import { signOut, signIn } from "@/lib/auth/index"
 
 export const authenticate = async (): Promise<void> => {
-  return await signIn("github", { redirectTo: "/app" })
+  return await signIn("github", { redirectTo: "/home" })
 }
 
 export const logout = async (): Promise<void> => {

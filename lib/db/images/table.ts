@@ -5,5 +5,5 @@ export const images = pgTable("images", {
   id: uuid("id").primaryKey().defaultRandom(),
   createdAt: timestamp("created_at"),
   imageUrl: text("image_url").notNull(),
-  userId: uuid("user_id").references(() => users.id),
+  gitId: text("git_id").references(() => users.gitId),
 })
