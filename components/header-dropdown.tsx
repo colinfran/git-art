@@ -31,7 +31,9 @@ const HeaderDropdown: FC = async () => {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <Link href="https://github.com/sponsors/colinfran"><DropdownMenuItem>Sponsor</DropdownMenuItem></Link>
+          <Link href="https://github.com/sponsors/colinfran">
+            <DropdownMenuItem>Sponsor</DropdownMenuItem>
+          </Link>
           <DropdownMenuSeparator />
           <DropdownMenuItem>
             <LogOutButton />
