@@ -4,11 +4,13 @@
 import React, { FC, useEffect, useState } from "react"
 import { Skeleton } from "@/components/ui/skeleton"
 import { useSession } from "next-auth/react"
+import { Session } from "next-auth"
 const Page: FC = () => {
-  const { data: session } = useSession()
+  const { data: untypedSession } = useSession()
   const [imageData, setImageData] = useState<{ url: string; alreadyGenerated: boolean } | null>(
     null,
   )
+  const session = untypedSession as Session & { user: { gitId?: string; login?: string } }
   const [isLoading, setIsLoading] = useState(true)
   useEffect(() => {
     async function loadImage(): Promise<void> {
