@@ -24,17 +24,14 @@ const Page: FC = () => {
           }),
         })
         const result = await response.json()
-        if (result?.image.data[0].url) {
+        if (result?.image?.data[0].url) {
           setImageData({ url: result.image.data[0].url, alreadyGenerated: false })
         }
         if (result?.alreadyGenerated) {
           setImageData({ url: "", alreadyGenerated: true })
         }
-        // await new Promise((resolve) => setTimeout(resolve, 3000))
-        // setImageData({ url: "/placeholder.svg", alreadyGenerated: false })
       } catch (error) {
         console.error("Failed to generate image:", error)
-        // Handle error (e.g., show an error message to the user)
       } finally {
         setIsLoading(false)
       }
@@ -53,8 +50,10 @@ const Page: FC = () => {
         ) : imageData ? (
           <div className="space-y-4">
             {imageData.alreadyGenerated ? (
-              <div>
-                You have already generated a GitArt image today. Please wait until tomorrow and try
+              <div className="text-center">
+                You have already generated a GitArt image today.
+                <br/>
+                Please wait until tomorrow and try
                 again.
               </div>
             ) : (
