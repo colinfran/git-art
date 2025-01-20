@@ -13,9 +13,7 @@ GitArt is a one-of-a-kind web application that transforms your GitHub history in
 [![shadcn/ui](https://img.shields.io/badge/shadcn%2Fui-000000?style=for-the-badge&logo=shadcnui&logoColor=white)](https://ui.shadcn.com/)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-000000?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 [![OpenAI](https://img.shields.io/badge/OpenAI-000000?style=for-the-badge&logo=openai&logoColor=white)](https://www.openai.com/)
-<!-- [![Stripe](https://img.shields.io/badge/Stripe-000000?style=for-the-badge&logo=stripe&logoColor=white)](https://stripe.com/)
-[![Zoho](https://img.shields.io/badge/Zoho-000000?style=for-the-badge&logo=zoho&logoColor=white)](https://zoho.com/)
-[![Resend](https://img.shields.io/badge/Resend-000000?style=for-the-badge&logo=resend&logoColor=white)](https://resend.com/) -->
+[![UploadThing](https://img.shields.io/badge/UploadThing-000000?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDMwMC4wMDAwMDAgMzAwLjAwMDAwMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQgbWVldCIgY2xhc3M9InNpemUtNiI+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMC4wMDAwMDAsMzAwLjAwMDAwMCkgc2NhbGUoMC4xMDAwMDAsLTAuMTAwMDAwKSIgZmlsbD0iI2ZmZiI+PHBhdGggZD0iTTIxOTMgMjk4MCBjLTExMSAtMjAgLTI0OCAtOTEgLTMzOSAtMTc3IC0xMjIgLTExNCAtMjEwIC0yOTUgLTIzMCAtNDc0IC03IC02MCAtMTggLTc1IC0yOSAtNDAgLTEwIDMyIC03OSAxMzQgLTEyMSAxNzcgLTEyOCAxMzUgLTI5MCAyMDYgLTQ2OSAyMDcgLTE4MSAxIC0zMjIgLTU5IC00NTUgLTE5MiAtOTUgLTk2IC0xNDEgLTE2NiAtMTgxIC0yODAgLTc1IC0yMTIgLTU5IC00NDkgNDIgLTY0NyAyMiAtNDIgMzggLTc4IDM3IC03OSAtMiAtMSAtMjMgLTEzIC00OCAtMjUgLTE1MyAtNzcgLTI3OCAtMjI2IC0zNDMgLTQwNSAtNzIgLTIwMyAtNTggLTQ0NCAzNyAtNjMzIDg5IC0xNzcgMjEzIC0yODggMzk4IC0zNTggNjYgLTI1IDg2IC0yOCAxOTggLTI4IDExMiAwIDEzMyAzIDIwMCAyNyAyMTYgNzkgMzc0IDI0OCA0NDUgNDc3IDkgMzAgMTggNjAgMjAgNjcgMyA4IDI3IDAgNzEgLTIyIDIwNCAtMTAzIDQ1MSAtODMgNjQwIDUxIDEzNyA5NyAyNDUgMjU0IDI5MCA0MjQgMjAgNzIgMjUgMjgzIDExIDM4MCBsLTkgNTUgNjYgMTMgYzIyMyA0MiA0MjkgMjMyIDUxMCA0NzAgMTYzIDQ3OSAtMTQyIDk5NCAtNjAyIDEwMTcgLTQ4IDIgLTExMCAwIC0xMzkgLTV6Ij48L3BhdGg+IDwvZz48L3N2Zz4=)](https://uploadthing.com)
 
 ## Installation
 
