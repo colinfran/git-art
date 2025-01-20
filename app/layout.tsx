@@ -8,7 +8,8 @@ import HeaderDropdown from "../components/header-dropdown"
 
 export const metadata = {
   title: "GitArt | Turn your git commits into art!",
-  description: "Discover and visualize your GitHub contributions in an artistic way. GitArt transforms your GitHub activity into a unique visual experience."
+  description:
+    "Discover and visualize your GitHub contributions in an artistic way. GitArt transforms your GitHub activity into a unique visual experience.",
 }
 
 type Props = any // eslint-disable-line @typescript-eslint/no-explicit-any
@@ -57,15 +58,15 @@ const RootLayout: FC<Props> = async ({ children }) => {
           property="og:description"
         />
         <meta content="https://gitart.app" property="og:url" />
-        <meta
-          content="/ogimage-gitart.jpg"
-          property="og:image"
-        />
+        <meta content="/ogimage-gitart.jpg" property="og:image" />
 
         {/* <!-- Twitter Card Meta Tags --> */}
         <meta content="summary_large_image" name="twitter:card" />
         <meta content="GitArt - Visualize Your GitHub Contributions" name="twitter:title" />
-        <meta content="Explore your GitHub contributions in a creative and artistic way with GitArt." name="twitter:description" />
+        <meta
+          content="Explore your GitHub contributions in a creative and artistic way with GitArt."
+          name="twitter:description"
+        />
         <meta content="https://gitart.app" name="twitter:image" />
         <meta content="Visual representation of GitHub activity" property="twitter:image:alt" />
       </head>
