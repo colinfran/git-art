@@ -10,6 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import LogOutButton from "@/components/log-out-button"
+import Link from "next/link"
 
 const HeaderDropdown: FC = async () => {
   const session = await auth()
@@ -30,7 +31,7 @@ const HeaderDropdown: FC = async () => {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <DropdownMenuItem>Support</DropdownMenuItem>
+          <Link href="https://github.com/sponsors/colinfran"><DropdownMenuItem>Sponsor</DropdownMenuItem></Link>
           <DropdownMenuSeparator />
           <DropdownMenuItem>
             <LogOutButton />
