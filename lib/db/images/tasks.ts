@@ -11,7 +11,7 @@ export const hasUserCreatedImageToday = async (userId: string): Promise<boolean>
     .from(images)
     .where(
       and(
-        eq(images.userId, userId),
+        eq(images.gitId, userId),
         gte(images.createdAt, startOfDay),
         lt(images.createdAt, endOfDay),
       ),
