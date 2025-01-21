@@ -28,13 +28,11 @@ const NewImage: FC<Props> = async ({ creditsCount }) => {
           </Button>
         )}
       </CardContent>
-      { hasCredits && (
+      {hasCredits && (
         <CardFooter className="flex justify-center">
-          <CardDescription>
-            Fee: 1 credit
-          </CardDescription>
+          <CardDescription>Fee: 1 credit</CardDescription>
         </CardFooter>
-        )}
+      )}
     </Card>
   )
 }
