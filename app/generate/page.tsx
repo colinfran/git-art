@@ -6,14 +6,12 @@ import { Skeleton } from "@/components/ui/skeleton"
 import { useSession } from "next-auth/react"
 import { Session } from "next-auth"
 import Loader from "@/components/loader"
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation"
 
 const Page: FC = () => {
-  const router = useRouter();
+  const router = useRouter()
   const { data: untypedSession } = useSession()
-  const [imageData, setImageData] = useState<{ url: string; outOfTokens: boolean } | null>(
-    null,
-  )
+  const [imageData, setImageData] = useState<{ url: string; outOfTokens: boolean } | null>(null)
   const session = untypedSession as Session & { user: { gitId?: string; login?: string } }
   const [isLoading, setIsLoading] = useState(true)
   useEffect(() => {

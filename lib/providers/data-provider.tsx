@@ -1,5 +1,5 @@
 "use client"
-import React, { createContext, FC, ReactNode, useContext, useEffect, useState } from "react"
+import React, { createContext, FC, ReactNode, useContext, useState } from "react"
 
 type ContextProps = {
   refresh: boolean
@@ -16,11 +16,7 @@ const DataContext = createContext<ContextProps>(defaultContextValue)
 export const DataProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [refresh, setRefresh] = useState<boolean>(false)
 
-  return (
-    <DataContext.Provider value={{ refresh, setRefresh }}>
-      {children}
-    </DataContext.Provider>
-  )
+  return <DataContext.Provider value={{ refresh, setRefresh }}>{children}</DataContext.Provider>
 }
 
 export const useData = (): ContextProps => {

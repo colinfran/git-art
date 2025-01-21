@@ -13,9 +13,7 @@ const NewImage: FC<Props> = async ({ tokenCount }) => {
     <Card className="w-full max-w-[900px]">
       <CardHeader>
         <CardTitle className="text-center">
-          {hasTokens
-            ? "Generate New Image"
-            : "Sorry, you have ran out of tokens."}
+          {hasTokens ? "Generate New Image" : "Sorry, you have ran out of tokens."}
         </CardTitle>
         <CardDescription className="text-center">
           {hasTokens

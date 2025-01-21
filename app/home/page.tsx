@@ -2,7 +2,7 @@ import React, { FC } from "react"
 import ImageGrid from "@/components/image-grid"
 import NewImage from "@/components/new-image"
 import { auth } from "@/lib/auth"
-import { getRecentImages, hasUserCreatedImageToday } from "@/lib/db/images/tasks"
+import { getRecentImages } from "@/lib/db/images/tasks"
 import { getTokenCount } from "@/lib/db/users/tasks"
 
 const Page: FC = async () => {

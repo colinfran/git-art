@@ -36,17 +36,16 @@ export const createUser = async (user: NewUser): Promise<void> => {
   }
 }
 
-export const getTokenCount = async(user: User): Promise<number> => {
+export const getTokenCount = async (user: User): Promise<number> => {
   try {
     const result = await db
       .select({ tokens: users.tokens })
       .from(users)
-      .where(eq(users.username, user.login!)
-    )
+      .where(eq(users.username, user.login!))
     if (result.length > 0 && result[0].tokens) {
-      return result[0].tokens;
+      return result[0].tokens
     } else {
-      return 0;
+      return 0
     }
   } catch (error) {
     console.error("Error checking if user exists", error)
@@ -57,11 +56,11 @@ export const getTokenCount = async(user: User): Promise<number> => {
 export const updateTokenCount = async (user: User, newTokenCount: number): Promise<void> => {
   try {
     await db
-      .update(users)  // Use update instead of select
-      .set({ tokens: newTokenCount })  // Set the new token count
-      .where(eq(users.username, user.login!))  // Update based on the username
-      .returning({ tokens: users.tokens });  // Return the updated token count
+      .update(users) // Use update instead of select
+      .set({ tokens: newTokenCount }) // Set the new token count
+      .where(eq(users.username, user.login!)) // Update based on the username
+      .returning({ tokens: users.tokens }) // Return the updated token count
   } catch (error) {
-    console.error("Error updating token count", error);
+    console.error("Error updating token count", error)
   }
 }

@@ -1,4 +1,4 @@
-import { addImage, hasUserCreatedImageToday } from "@/lib/db/images/tasks"
+import { addImage } from "@/lib/db/images/tasks"
 import { getTokenCount, updateTokenCount } from "@/lib/db/users/tasks"
 import { fetchCommitsForUser } from "@/lib/git/tasks"
 import { uploadImage } from "@/lib/images/task"
