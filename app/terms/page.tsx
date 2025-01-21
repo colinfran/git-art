@@ -14,7 +14,6 @@ const Page: FC = async () => {
             the App.`}
           </p>
         </section>
-
         <section className="mb-8">
           <h2 className="mb-4 text-2xl font-semibold">2. Use of the App</h2>
           <p>
@@ -23,36 +22,41 @@ const Page: FC = async () => {
             other purpose without prior written consent.`}
           </p>
         </section>
-
         <section className="mb-8">
-          <h2 className="mb-4 text-2xl font-semibold">3. Disclaimers</h2>
+          <h2 className="mb-4 text-2xl font-semibold">3. Credits</h2>
+          <p>
+            {`When you sign up for GitArt, you will receive 3 free credits. These credits can be used
+            for the features provided by the App. In addition, you have the option to purchase more
+            credits to continue using the services. The purchase of credits is subject to the
+            payment terms and conditions provided at the time of the transaction.`}
+          </p>
+        </section>
+        <section className="mb-8">
+          <h2 className="mb-4 text-2xl font-semibold">4. Disclaimers</h2>
           <p>
             {`The App and all content provided are delivered on an "as-is" basis. GitArt does not
             offer any warranties, either express or implied, including but not limited to the
             implied warranties of merchantability or fitness for a particular purpose.`}
           </p>
         </section>
-
         <section className="mb-8">
-          <h2 className="mb-4 text-2xl font-semibold">4. Limitation of Liability</h2>
+          <h2 className="mb-4 text-2xl font-semibold">5. Limitation of Liability</h2>
           <p>
             {`In no event shall GitArt be held liable for any damages, including but not limited to
             loss of data, profits, or business interruption, arising from your use or inability to
             use the App, even if GitArt has been advised of the possibility of such damages.`}
           </p>
         </section>
-
         <section className="mb-8">
-          <h2 className="mb-4 text-2xl font-semibold">5. Changes to Content</h2>
+          <h2 className="mb-4 text-2xl font-semibold">6. Changes to Content</h2>
           <p>
             {`GitArt may update, modify, or remove content from the App at any time without notice.
             While we strive for accuracy, GitArt does not guarantee that all information displayed
             is current or free from errors.`}
           </p>
         </section>
-
         <section className="mb-8">
-          <h2 className="mb-4 text-2xl font-semibold">6. Governing Law</h2>
+          <h2 className="mb-4 text-2xl font-semibold">7. Governing Law</h2>
           <p>
             {`These terms and conditions are governed by and construed in accordance with the laws of
             the State of California, USA. Any disputes related to these terms shall be resolved
@@ -60,7 +64,6 @@ const Page: FC = async () => {
           </p>
         </section>
       </main>
-
       <footer className="p-4 text-black">
         <div className="container mx-auto text-center">
           <p>&copy; {new Date().getFullYear()} GitArt. All rights reserved.</p>

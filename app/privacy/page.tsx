@@ -6,7 +6,6 @@ const Page: FC = async () => {
     <div className="flex min-h-screen flex-col">
       <main className="container mx-auto grow px-4 py-8">
         <h1 className="mb-6 text-center text-3xl font-bold">Privacy Policy</h1>
-
         <section className="mb-8">
           <h2 className="mb-4 text-2xl font-semibold">1. Information We Collect</h2>
           <p>
@@ -14,7 +13,6 @@ const Page: FC = async () => {
             best experience and improve our service. The types of information we collect are as
             follows:
           </p>
-
           <h3 className="mt-4 text-xl font-semibold">1.1 Website Data</h3>
           <p>
             We collect website usage data to enhance the performance and functionality of our
@@ -22,7 +20,6 @@ const Page: FC = async () => {
             interaction to analyze and improve the user experience. This data is collected
             automatically and does not identify individual users.
           </p>
-
           <h3 className="mt-4 text-xl font-semibold">1.2 User Information</h3>
           <p>When users create an account, we collect the following personal information:</p>
           <ul className="list-disc pl-6">
@@ -38,8 +35,13 @@ const Page: FC = async () => {
             personalized services. We will not collect any sensitive personal data beyond what is
             listed above.
           </p>
+          <h3 className="mt-4 text-xl font-semibold">1.3 Purchase Information</h3>
+          <p>
+            We collect information related to your purchases, including the number of credits
+            purchased, payment method, and transaction details. This data is used for managing your
+            account, processing transactions, and ensuring you have access to the purchased credits.
+          </p>
         </section>
-
         <section className="mb-8">
           <h2 className="mb-4 text-2xl font-semibold">2. How We Use Your Information</h2>
           <p>We use the information we collect for the following purposes:</p>
@@ -48,9 +50,11 @@ const Page: FC = async () => {
             <li>To improve website performance and user experience</li>
             <li>To send account-related communications and updates</li>
             <li>To personalize the user experience based on GitHub information</li>
+            <li>
+              To manage credits, including offering free credits and processing credit purchases
+            </li>
           </ul>
         </section>
-
         <section className="mb-8">
           <h2 className="mb-4 text-2xl font-semibold">3. Data Security</h2>
           <p>
@@ -59,7 +63,6 @@ const Page: FC = async () => {
             electronic storage is 100% secure, and we cannot guarantee absolute security.
           </p>
         </section>
-
         <section className="mb-8">
           <h2 className="mb-4 text-2xl font-semibold">4. Your Rights</h2>
           <p>
@@ -68,7 +71,6 @@ const Page: FC = async () => {
             information provided below.
           </p>
         </section>
-
         <section className="mb-8">
           <h2 className="mb-4 text-2xl font-semibold">5. Changes to This Privacy Policy</h2>
           <p>
@@ -77,7 +79,6 @@ const Page: FC = async () => {
             be posted on this page with an updated revision date.
           </p>
         </section>
-
         <section className="mb-8">
           <h2 className="mb-4 text-2xl font-semibold">6. Contact Us</h2>
           <p>
@@ -95,7 +96,6 @@ const Page: FC = async () => {
           </p>
         </section>
       </main>
-
       <footer className="p-4 text-black">
         <div className="container mx-auto text-center">
           <p>&copy; {new Date().getFullYear()} GitArt. All rights reserved.</p>
