@@ -6,9 +6,12 @@ import { Skeleton } from "@/components/ui/skeleton"
 import { useSession } from "next-auth/react"
 import { Session } from "next-auth"
 import Loader from "@/components/loader"
+import { useRouter } from 'next/navigation';
+
 const Page: FC = () => {
+  const router = useRouter();
   const { data: untypedSession } = useSession()
-  const [imageData, setImageData] = useState<{ url: string; alreadyGenerated: boolean } | null>(
+  const [imageData, setImageData] = useState<{ url: string; outOfTokens: boolean } | null>(
     null,
   )
   const session = untypedSession as Session & { user: { gitId?: string; login?: string } }
@@ -18,18 +21,15 @@ const Page: FC = () => {
       try {
         const response = await fetch("/api/get-image", {
           method: "POST",
-          body: JSON.stringify({
-            gitId: session?.user!.gitId!,
-            username: session?.user!.login!,
-            email: session?.user!.email!,
-          }),
+          body: JSON.stringify({ ...session?.user }),
         })
         const result = await response.json()
         if (result?.image?.data[0].url) {
-          setImageData({ url: result.image.data[0].url, alreadyGenerated: false })
+          setImageData({ url: result.image.data[0].url, outOfTokens: false })
+          router.refresh()
         }
-        if (result?.alreadyGenerated) {
-          setImageData({ url: "", alreadyGenerated: true })
+        if (result?.outOfTokens) {
+          setImageData({ url: "", outOfTokens: true })
         }
       } catch (error) {
         console.error("Failed to generate image:", error)
@@ -55,11 +55,11 @@ const Page: FC = () => {
           </div>
         ) : imageData ? (
           <div className="space-y-4">
-            {imageData.alreadyGenerated ? (
+            {imageData.outOfTokens ? (
               <div className="text-center">
-                You have already generated a GitArt image today.
+                You have ran out of image generation tokens.
                 <br />
-                Please wait until tomorrow and try again.
+                Please purchase more tokens and try again.
               </div>
             ) : (
               // eslint-disable-next-line @next/next/no-img-element

@@ -17,7 +17,7 @@ const HeaderDropdown: FC = async () => {
   const session = await auth()
   const user = session?.user
   return (
-    <div className="flex w-full justify-end">
+    <div className="">
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button className="overflow-hidden rounded-full" size="icon" variant="outline">

@@ -46,7 +46,7 @@ export async function fetchCommitsForRepo(
 
 // Fetch commits for a user from all repositories
 export async function fetchCommitsForUser(user: User): Promise<GitHubCommit[]> {
-  const { username, email, gitId } = user
+  const { login: username, email, gitId } = user
   const repos = await fetchUserRepos(username)
   const allCommits: GitHubCommit[] = []
 

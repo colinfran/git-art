@@ -1,4 +1,4 @@
-import { pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core"
+import { integer, pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core"
 
 // Define the users table
 export const users = pgTable("users", {
@@ -9,4 +9,5 @@ export const users = pgTable("users", {
   imageUrl: text("image_url"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   gitId: text("git_id").notNull(),
+  tokens: integer("tokens").default(3),
 })

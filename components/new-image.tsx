@@ -4,27 +4,28 @@ import { Button } from "./ui/button"
 import Link from "next/link"
 
 type Props = {
-  alreadyGeneratedToday: boolean
+  tokenCount: number
 }
 
-const NewImage: FC<Props> = async ({ alreadyGeneratedToday }) => {
+const NewImage: FC<Props> = async ({ tokenCount }) => {
+  const hasTokens = tokenCount > 0
   return (
     <Card className="w-full max-w-[900px]">
       <CardHeader>
         <CardTitle className="text-center">
-          {alreadyGeneratedToday
-            ? "Sorry, you already generated an image today."
-            : "Generate New Image"}
+          {hasTokens
+            ? "Generate New Image"
+            : "Sorry, you have ran out of tokens."}
         </CardTitle>
         <CardDescription className="text-center">
-          {alreadyGeneratedToday
-            ? "Come back tomorrow to generate a new image."
-            : "Generate an image using your coding contributions and commit history."}
+          {hasTokens
+            ? "Generate an image using your coding contributions and commit history."
+            : "To generate more images, please purchase more tokens."}
         </CardDescription>
       </CardHeader>
       <CardContent className="flex items-center justify-center">
-        {!alreadyGeneratedToday && (
-          <Button asChild /*onClick={handleGenerate} disabled={isGenerating}*/>
+        {hasTokens && (
+          <Button asChild>
             <Link href="/generate">{"Generate"}</Link>
           </Button>
         )}
