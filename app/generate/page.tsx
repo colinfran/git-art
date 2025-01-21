@@ -39,6 +39,7 @@ const Page: FC = () => {
     if (session?.user) {
       loadImage()
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session])
 
   return (

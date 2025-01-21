@@ -45,9 +45,9 @@ const HeaderDropdown: FC = async () => {
             className="flex w-full cursor-pointer flex-row items-center gap-2"
             asChild
           >
-            <Link href="https://github.com/sponsors/colinfran">
+            <Link href="/tokens">
               <HandHeart size={16} />
-              <span>Sponsor</span>
+              <span>Purchase Tokens</span>
             </Link>
           </DropdownMenuItem>
           <DropdownMenuSeparator />
