@@ -1,4 +1,4 @@
-import { eq, or, sql, } from "drizzle-orm"
+import { eq, or, sql } from "drizzle-orm"
 import { users } from "./table"
 import { db } from "@/lib/db"
 import { User } from "next-auth"
@@ -57,15 +57,9 @@ export const updateCreditsCount = async (user: User, count: number): Promise<voi
   try {
     await db
       .update(users) // Use update instead of select
-      .set({ credits: sql`${users.credits} + ${count}`})
-      .where(
-        or(
-          eq(users.username, user.login!),
-          eq(users.email, user.email!)
-        )
-      ) // Update based on the username
+      .set({ credits: sql`${users.credits} + ${count}` })
+      .where(or(eq(users.username, user.login!), eq(users.email, user.email!))) // Update based on the username
   } catch (error) {
     console.error("Error updating credits count", error)
   }
 }
-

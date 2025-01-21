@@ -33,7 +33,7 @@ export const POST = async (req: Request): Promise<NextResponse> => {
         status: paymentStatus,
         sessionId: sessionId,
       })
-      await updateCreditsCount({email: customerEmail}, 10)
+      await updateCreditsCount({ email: customerEmail }, 10)
       return NextResponse.json({ status: 200 })
     } else {
       throw Error("Error")
