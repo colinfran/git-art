@@ -22,21 +22,26 @@ export async function fetchCommitsForRepo(
   gitId: string,
   email: string,
 ): Promise<GitHubCommit[]> {
-  const response = await fetch(`https://api.github.com/repos/${username}/${repo}/commits`, {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
-    },
-  })
-
-  if (!response.ok) {
-    throw new Error(`Failed to fetch commits for repository ${repo}`)
+  try {
+    const response = await fetch(`https://api.github.com/repos/${username}/${repo}/commits`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+      },
+    })
+  
+    if (!response.ok) {
+      throw new Error(`Failed to fetch commits for repository ${repo}`)
+    }
+    const commits = await response.json()
+    return commits.filter(
+      (commit: GitHubCommit) =>
+        String(commit.author?.id) === String(gitId) || commit.commit.author.email === email,
+    ) 
+  } catch (error) {
+    console.error(error)
+    return []
   }
-  const commits = await response.json()
-  return commits.filter(
-    (commit: GitHubCommit) =>
-      String(commit.author?.id) === String(gitId) || commit.commit.author.email === email,
-  )
 }
 
 // Fetch commits for a user from all repositories
