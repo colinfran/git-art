@@ -51,7 +51,11 @@ const ZoomableImage: FC<ImageProps> = ({ src, alt, className, ...props }) => {
           width={500}
         />
       </DialogTrigger>
-      <DialogContent className="max-w-7xl border-0 bg-transparent p-0 shadow-none">
+      <DialogContent
+        className="max-w-7xl border-0 bg-transparent p-0 shadow-none outline-none"
+        onCloseAutoFocus={(e) => e.preventDefault()}
+        onOpenAutoFocus={(e) => e.preventDefault()}
+      >
         <DialogTitle className="sr-only">Image</DialogTitle>
         <div className="relative flex flex-col text-clip rounded-md bg-transparent">
           <Image
@@ -69,7 +73,11 @@ const ZoomableImage: FC<ImageProps> = ({ src, alt, className, ...props }) => {
           />
         </div>
         <DialogFooter>
-          <Button className="mx-auto flex w-[200px] flex-row gap-2" onClick={handleDownload}>
+          <Button
+            className="mx-auto flex w-[200px] flex-row gap-2"
+            disabled={loading}
+            onClick={handleDownload}
+          >
             {loading ? <Loader2 className="animate-spin" size={16} /> : <DownloadIcon size={16} />}
             <span>Download</span>
           </Button>
