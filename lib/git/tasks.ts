@@ -29,7 +29,7 @@ export async function fetchCommitsForRepo(
         Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
       },
     })
-  
+
     if (!response.ok) {
       throw new Error(`Failed to fetch commits for repository ${repo}`)
     }
@@ -37,7 +37,7 @@ export async function fetchCommitsForRepo(
     return commits.filter(
       (commit: GitHubCommit) =>
         String(commit.author?.id) === String(gitId) || commit.commit.author.email === email,
-    ) 
+    )
   } catch (error) {
     console.error(error)
     return []
