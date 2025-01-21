@@ -20,7 +20,7 @@ const RootLayout: FC<Props> = async ({ children }) => {
         <link href="/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png" />
         <link href="/favicon-96x96.png" rel="icon" sizes="96x96" type="image/png" />
         <link href="/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png" />
-        
+
         <title>GitArt | Turn your git commits into art!</title>
 
         {/* <!-- SEO Meta Tags --> */}
