@@ -9,7 +9,7 @@ export const addPurchase = async (data: any): Promise<void> => {
       email: data.email,
       amount: data.amount,
       status: data.status,
-      sessionId: data.sessionIdf,
+      sessionId: data.sessionId,
     })
   } catch (error) {
     console.error(error)
