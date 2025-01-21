@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import LogOutButton from "@/components/log-out-button"
 import Link from "next/link"
-import { HandHeart, ImageIcon } from "lucide-react"
+import { ImageIcon, ShoppingCartIcon } from "lucide-react"
 
 const HeaderDropdown: FC = async () => {
   const session = await auth()
@@ -45,9 +45,9 @@ const HeaderDropdown: FC = async () => {
             className="flex w-full cursor-pointer flex-row items-center gap-2"
             asChild
           >
-            <Link href="/tokens">
-              <HandHeart size={16} />
-              <span>Purchase Tokens</span>
+            <Link href="/credits">
+              <ShoppingCartIcon size={16} />
+              <span>Purchase Credits</span>
             </Link>
           </DropdownMenuItem>
           <DropdownMenuSeparator />

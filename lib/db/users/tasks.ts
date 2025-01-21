@@ -36,14 +36,14 @@ export const createUser = async (user: NewUser): Promise<void> => {
   }
 }
 
-export const getTokenCount = async (user: User): Promise<number> => {
+export const getCreditsCount = async (user: User): Promise<number> => {
   try {
     const result = await db
-      .select({ tokens: users.tokens })
+      .select({ credits: users.credits })
       .from(users)
       .where(eq(users.username, user.login!))
-    if (result.length > 0 && result[0].tokens) {
-      return result[0].tokens
+    if (result.length > 0 && result[0].credits) {
+      return result[0].credits
     } else {
       return 0
     }
@@ -53,14 +53,14 @@ export const getTokenCount = async (user: User): Promise<number> => {
   }
 }
 
-export const updateTokenCount = async (user: User, newTokenCount: number): Promise<void> => {
+export const updateCreditsCount = async (user: User, count: number): Promise<void> => {
   try {
     await db
       .update(users) // Use update instead of select
-      .set({ tokens: newTokenCount }) // Set the new token count
+      .set({ credits: count }) // Set the new credits count
       .where(eq(users.username, user.login!)) // Update based on the username
-      .returning({ tokens: users.tokens }) // Return the updated token count
+      .returning({ credits: users.credits }) // Return the updated credits count
   } catch (error) {
-    console.error("Error updating token count", error)
+    console.error("Error updating credits count", error)
   }
 }

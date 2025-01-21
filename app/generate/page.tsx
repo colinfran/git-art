@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation"
 const Page: FC = () => {
   const router = useRouter()
   const { data: untypedSession } = useSession()
-  const [imageData, setImageData] = useState<{ url: string; outOfTokens: boolean } | null>(null)
+  const [imageData, setImageData] = useState<{ url: string; outOfCredits: boolean } | null>(null)
   const session = untypedSession as Session & { user: { gitId?: string; login?: string } }
   const [isLoading, setIsLoading] = useState(true)
   useEffect(() => {
@@ -23,11 +23,11 @@ const Page: FC = () => {
         })
         const result = await response.json()
         if (result?.image?.data[0].url) {
-          setImageData({ url: result.image.data[0].url, outOfTokens: false })
+          setImageData({ url: result.image.data[0].url, outOfCredits: false })
           router.refresh()
         }
-        if (result?.outOfTokens) {
-          setImageData({ url: "", outOfTokens: true })
+        if (result?.outOfCredits) {
+          setImageData({ url: "", outOfCredits: true })
         }
       } catch (error) {
         console.error("Failed to generate image:", error)
@@ -39,7 +39,6 @@ const Page: FC = () => {
     if (session?.user) {
       loadImage()
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session])
 
   return (
@@ -54,11 +53,11 @@ const Page: FC = () => {
           </div>
         ) : imageData ? (
           <div className="space-y-4">
-            {imageData.outOfTokens ? (
+            {imageData.outOfCredits ? (
               <div className="text-center">
-                You have ran out of image generation tokens.
+                You have ran out of image generation credits.
                 <br />
-                Please purchase more tokens and try again.
+                Please purchase more credits and try again.
               </div>
             ) : (
               // eslint-disable-next-line @next/next/no-img-element

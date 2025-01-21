@@ -4,25 +4,25 @@ import { Button } from "./ui/button"
 import Link from "next/link"
 
 type Props = {
-  tokenCount: number
+  creditsCount: number
 }
 
-const NewImage: FC<Props> = async ({ tokenCount }) => {
-  const hasTokens = tokenCount > 0
+const NewImage: FC<Props> = async ({ creditsCount }) => {
+  const hasCredits = creditsCount > 0
   return (
     <Card className="w-full max-w-[900px]">
       <CardHeader>
         <CardTitle className="text-center">
-          {hasTokens ? "Generate New Image" : "Sorry, you have ran out of tokens."}
+          {hasCredits ? "Generate New Image" : "Sorry, you have ran out of credits."}
         </CardTitle>
         <CardDescription className="text-center">
-          {hasTokens
+          {hasCredits
             ? "Generate an image using your coding contributions and commit history."
-            : "To generate more images, please purchase more tokens."}
+            : "To generate more images, please purchase more credits."}
         </CardDescription>
       </CardHeader>
       <CardContent className="flex items-center justify-center">
-        {hasTokens && (
+        {hasCredits && (
           <Button asChild>
             <Link href="/generate">{"Generate"}</Link>
           </Button>

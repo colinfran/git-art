@@ -3,7 +3,8 @@ import React, { FC, useEffect, useState } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "./ui/table"
 import { Skeleton } from "./ui/skeleton"
-import uniqid from "uniqid"
+import { useSession } from "next-auth/react"
+import { Session } from "next-auth"
 
 type Purchase = {
   id: string
@@ -13,25 +14,27 @@ type Purchase = {
 }
 
 const PurchaseHistory: FC = () => {
+  const { data: untypedSession } = useSession()
+  const session = untypedSession as Session & { user: { gitId?: string; login?: string } }
+
   const [purchaseHistory, setPurchaseHistory] = useState<Purchase[] | undefined>(undefined)
 
   const fetchPurchaseHistory = async (): Promise<void> => {
-    // fetch purchase history
-    await new Promise((resolve) => setTimeout(resolve, 3000))
-    setPurchaseHistory([
-      { id: uniqid(), date: "2023-06-01", amount: 10, cost: 10 },
-      { id: uniqid(), date: "2023-05-15", amount: 10, cost: 10 },
-      { id: uniqid(), date: "2023-05-01", amount: 10, cost: 10 },
-      { id: uniqid(), date: "2023-05-01", amount: 10, cost: 10 },
-      { id: uniqid(), date: "2023-05-01", amount: 10, cost: 10 },
-      { id: uniqid(), date: "2023-05-01", amount: 10, cost: 10 },
-      { id: uniqid(), date: "2023-05-01", amount: 10, cost: 10 },
-      { id: uniqid(), date: "2023-05-01", amount: 10, cost: 10 },
-      { id: uniqid(), date: "2023-05-01", amount: 10, cost: 10 },
-      { id: uniqid(), date: "2023-05-01", amount: 10, cost: 10 },
-      { id: uniqid(), date: "2023-05-01", amount: 10, cost: 10 },
-      { id: uniqid(), date: "2023-05-01", amount: 10, cost: 10 },
-    ])
+    try {
+      const response = await fetch("/api/purchases", {
+        method: "POST",
+        body: JSON.stringify({ ...session?.user }),
+      })
+      const { purchases } = await response.json()
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const values = purchases.map((item: any) => ({
+        ...item,
+        cost: "$10",
+      }))
+      setPurchaseHistory(values)
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   useEffect(() => {
@@ -61,7 +64,7 @@ const PurchaseHistory: FC = () => {
                 {purchaseHistory.map((purchase: Purchase) => (
                   <TableRow key={purchase.id}>
                     <TableCell>{purchase.date}</TableCell>
-                    <TableCell>{purchase.amount} Tokens</TableCell>
+                    <TableCell>{purchase.amount} Credits</TableCell>
                     <TableCell>${purchase.cost}</TableCell>
                   </TableRow>
                 ))}

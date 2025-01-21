@@ -9,5 +9,5 @@ export const users = pgTable("users", {
   imageUrl: text("image_url"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   gitId: text("git_id").notNull(),
-  tokens: integer("tokens").default(3),
+  credits: integer("credits").default(3),
 })
