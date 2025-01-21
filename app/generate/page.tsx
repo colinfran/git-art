@@ -5,6 +5,7 @@ import React, { FC, useEffect, useState } from "react"
 import { Skeleton } from "@/components/ui/skeleton"
 import { useSession } from "next-auth/react"
 import { Session } from "next-auth"
+import Loader from "@/components/loader"
 const Page: FC = () => {
   const { data: untypedSession } = useSession()
   const [imageData, setImageData] = useState<{ url: string; alreadyGenerated: boolean } | null>(
@@ -46,7 +47,12 @@ const Page: FC = () => {
     <div className="mx-[2px] mt-2 flex flex-col items-center justify-center gap-8 p-8">
       <div className="flex justify-center">
         {isLoading ? (
-          <Skeleton className="size-[75vw] md:size-[75vh]" />
+          <div className="relative">
+            <Skeleton className="size-[75vw] md:size-[75vh]" />
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+              <Loader />
+            </div>
+          </div>
         ) : imageData ? (
           <div className="space-y-4">
             {imageData.alreadyGenerated ? (
