@@ -48,11 +48,9 @@ const PurchaseHistory: FC = () => {
         <CardTitle>Purchase History</CardTitle>
       </CardHeader>
       <CardContent>
-        {purchaseHistory === undefined && <Skeleton className="h-[398px] space-y-1.5 p-6" />}
+        {purchaseHistory === undefined && <Skeleton className="h-[300px] space-y-1.5 p-6" />}
         {purchaseHistory && (
           <div className="max-h-[300px] min-h-[300px] overflow-y-auto">
-            {" "}
-            {/* Scrollable wrapper */}
             <Table>
               <TableHeader>
                 <TableRow>
