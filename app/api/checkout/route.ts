@@ -6,11 +6,12 @@ const priceId = process.env.STRIPE_PRICE_ID!
 
 export const POST = async (req: NextRequest): Promise<NextResponse> => {
   const formData = await req.formData()
-  const email = formData.get("email")
+  const email = formData.get("email") as string
 
   try {
     // Create Checkout Sessions from body params.
     const session = await stripe.checkout.sessions.create({
+      payment_method_types: ['card'],
       line_items: [
         {
           price: priceId, // Use the provided Price ID from the request body
