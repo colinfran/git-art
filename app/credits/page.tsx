@@ -55,11 +55,11 @@ const Page: FC = async () => {
       <PurchaseHistory />
       <PurchaseAlert />
       <footer className="mt-8 text-center text-sm text-gray-500">
-        <Link href="/terms" className="hover:underline">
+        <Link className="hover:underline" href="/terms">
           Terms of Service
         </Link>
         {" • "}
-        <Link href="/privacy" className="hover:underline">
+        <Link className="hover:underline" href="/privacy">
           Privacy Policy
         </Link>
       </footer>
