@@ -17,6 +17,7 @@ const PurchaseAlert: FC = () => {
   const router = useRouter()
 
   const successfulPurchase = searchParams.has("success")
+  const canceledPurchase = searchParams.has("canceled")
 
   const [showAlert, setShowAlert] = useState(false)
 
@@ -25,7 +26,10 @@ const PurchaseAlert: FC = () => {
       router.replace(window.location.pathname)
       setShowAlert(true)
     }
-  }, [successfulPurchase])
+    if (canceledPurchase){
+      router.replace(window.location.pathname)
+    }
+  }, [successfulPurchase, canceledPurchase])
 
   return (
     <AlertDialog open={showAlert}>
