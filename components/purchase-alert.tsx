@@ -26,7 +26,7 @@ const PurchaseAlert: FC = () => {
       router.replace(window.location.pathname)
       setShowAlert(true)
     }
-    if (canceledPurchase){
+    if (canceledPurchase) {
       router.replace(window.location.pathname)
     }
   }, [successfulPurchase, canceledPurchase])
