@@ -2,7 +2,7 @@ import { db } from "@/lib/db"
 import { and, desc, eq, gte, lt } from "drizzle-orm"
 import { images } from "./table"
 
-type RangeProps = { startOfDay: Date, endOfDay: Date }
+type RangeProps = { startOfDay: Date; endOfDay: Date }
 
 const getUTCDayRange = (): RangeProps => {
   const now = new Date()
