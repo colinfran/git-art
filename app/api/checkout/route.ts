@@ -11,7 +11,7 @@ export const POST = async (req: NextRequest): Promise<NextResponse> => {
   try {
     // Create Checkout Sessions from body params.
     const session = await stripe.checkout.sessions.create({
-      payment_method_types: ['card'],
+      payment_method_types: ["card"],
       line_items: [
         {
           price: priceId, // Use the provided Price ID from the request body
