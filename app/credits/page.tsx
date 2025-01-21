@@ -13,6 +13,7 @@ import { getCreditsCount } from "@/lib/db/users/tasks"
 import { auth } from "@/lib/auth"
 import { ShoppingCartIcon } from "lucide-react"
 import PurchaseAlert from "@/components/purchase-alert"
+import Link from "next/link"
 
 const Page: FC = async () => {
   const session = await auth()
@@ -53,6 +54,15 @@ const Page: FC = async () => {
       </div>
       <PurchaseHistory />
       <PurchaseAlert />
+      <footer className="mt-8 text-center text-sm text-gray-500">
+        <Link href="/terms" className="hover:underline">
+          Terms of Service
+        </Link>
+        {" • "}
+        <Link href="/privacy" className="hover:underline">
+          Privacy Policy
+        </Link>
+      </footer>
     </div>
   )
 }
