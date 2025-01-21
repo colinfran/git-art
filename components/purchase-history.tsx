@@ -62,9 +62,9 @@ const PurchaseHistory: FC = () => {
               <TableBody>
                 {purchaseHistory.map((purchase: Purchase) => (
                   <TableRow key={purchase.id}>
-                    <TableCell>{purchase.date}</TableCell>
+                    <TableCell>{new Date(purchase.date).toLocaleString()}</TableCell>
                     <TableCell>{purchase.amount} Credits</TableCell>
-                    <TableCell>${purchase.cost}</TableCell>
+                    <TableCell>{purchase.cost}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>

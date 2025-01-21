@@ -7,7 +7,7 @@ export const addPurchase = async (data: any): Promise<void> => {
   try {
     await db.insert(purchases).values({
       email: data.email,
-      amount: data.amount,
+      amount: 10,
       status: data.status,
       sessionId: data.sessionId,
     })
