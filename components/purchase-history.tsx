@@ -39,6 +39,7 @@ const PurchaseHistory: FC = () => {
 
   useEffect(() => {
     fetchPurchaseHistory()
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   }, [])
 
   return (

@@ -22,7 +22,7 @@ export const POST = async (req: NextRequest): Promise<NextResponse> => {
   // add image to db
   if (url) {
     await addImage(data.gitId, url)
-    await updateCreditsCount(data, creditsCount - 1)
+    await updateCreditsCount(data, -1)
   }
   return NextResponse.json({ image: image })
 }

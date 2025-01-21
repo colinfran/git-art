@@ -1,4 +1,5 @@
 import { addPurchase } from "@/lib/db/purchases/tasks"
+import { updateCreditsCount } from "@/lib/db/users/tasks"
 import { NextResponse } from "next/server"
 import Stripe from "stripe"
 
@@ -32,7 +33,7 @@ export const POST = async (req: Request): Promise<NextResponse> => {
         status: paymentStatus,
         sessionId: sessionId,
       })
-
+      await updateCreditsCount({email: customerEmail}, 10)
       return NextResponse.json({ status: 200 })
     } else {
       throw Error("Error")
