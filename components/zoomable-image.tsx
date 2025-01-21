@@ -56,7 +56,7 @@ const ZoomableImage: FC<ImageProps> = ({ src, alt, ...props }) => {
               height: "auto",
             }}
             width={500}
-            onLoad={()=> setImageLoading(false)}
+            onLoad={() => setImageLoading(false)}
           />
         </div>
       </DialogTrigger>
