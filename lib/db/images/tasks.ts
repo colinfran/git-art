@@ -2,10 +2,21 @@ import { db } from "@/lib/db"
 import { and, desc, eq, gte, lt } from "drizzle-orm"
 import { images } from "./table"
 
+type RangeProps = { startOfDay: Date, endOfDay: Date }
+
+const getUTCDayRange = (): RangeProps => {
+  const now = new Date()
+  const startOfDay = new Date(
+    Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 0, 0, 0, 0),
+  )
+  const endOfDay = new Date(
+    Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 23, 59, 59, 999),
+  )
+  return { startOfDay, endOfDay }
+}
+
 export const hasUserCreatedImageToday = async (gitId: string): Promise<boolean> => {
-  const today = new Date()
-  const startOfDay = new Date(today.setHours(0, 0, 0, 0))
-  const endOfDay = new Date(today.setHours(23, 59, 59, 999))
+  const { startOfDay, endOfDay } = getUTCDayRange()
   const response = await db
     .select()
     .from(images)
@@ -23,11 +34,9 @@ export const hasUserCreatedImageToday = async (gitId: string): Promise<boolean> 
 
 export const addImage = async (gitId: string, imageUrl: string): Promise<void> => {
   try {
-    const createdAt = new Date()
     await db.insert(images).values({
       gitId,
       imageUrl,
-      createdAt,
     })
   } catch (error) {
     console.error(error)
