@@ -3,7 +3,7 @@ import { users } from "../users/table"
 
 export const images = pgTable("images", {
   id: uuid("id").primaryKey().defaultRandom(),
-  createdAt: timestamp("created_at").defaultNow(),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
   imageUrl: text("image_url").notNull(),
   gitId: text("git_id").references(() => users.gitId),
 })
