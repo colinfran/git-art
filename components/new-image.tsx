@@ -1,5 +1,5 @@
 import React, { FC } from "react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./ui/card"
 import { Button } from "./ui/button"
 import Link from "next/link"
 
@@ -28,6 +28,13 @@ const NewImage: FC<Props> = async ({ creditsCount }) => {
           </Button>
         )}
       </CardContent>
+      { hasCredits && (
+        <CardFooter className="flex justify-center">
+          <CardDescription>
+            Fee: 1 credit
+          </CardDescription>
+        </CardFooter>
+        )}
     </Card>
   )
 }
