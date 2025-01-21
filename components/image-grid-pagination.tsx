@@ -42,11 +42,7 @@ const ImageGridPagination: FC<Props> = ({ images }) => {
           )}
           {visibleImages.map((image, index) => (
             <div className="relative aspect-square" key={`${image}-${index}`}>
-              <ZoomableImage
-                alt={`Generated image ${image}`}
-                className="rounded-md object-cover"
-                src={image || "/placeholder.svg"}
-              />
+              <ZoomableImage alt={`Generated image ${image}`} src={image || "/placeholder.svg"} />
             </div>
           ))}
         </div>

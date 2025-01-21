@@ -16,11 +16,7 @@ const ImageGrid: FC<Props> = ({ images }) => {
         <div className="grid grid-cols-3 gap-4">
           {images.map((src, index) => (
             <div className="relative aspect-square" key={index}>
-              <ZoomableImage
-                alt={`Generated image ${index + 1}`}
-                className="rounded-md object-cover"
-                src={src || "/placeholder.svg"}
-              />
+              <ZoomableImage alt={`Generated image ${index + 1}`} src={src || "/placeholder.svg"} />
             </div>
           ))}
         </div>

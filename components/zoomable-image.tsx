@@ -6,9 +6,11 @@ import Image, { ImageProps } from "next/image"
 import { Button } from "./ui/button"
 import { DownloadIcon, Loader2 } from "lucide-react"
 import uniqid from "uniqid"
+import { Skeleton } from "./ui/skeleton"
 
-const ZoomableImage: FC<ImageProps> = ({ src, alt, className, ...props }) => {
+const ZoomableImage: FC<ImageProps> = ({ src, alt, ...props }) => {
   const [loading, setLoading] = useState(false)
+  const [imageLoading, setImageLoading] = useState(true)
 
   if (!src) return null
 
@@ -37,19 +39,26 @@ const ZoomableImage: FC<ImageProps> = ({ src, alt, className, ...props }) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Image
-          {...props}
-          alt={alt || ""}
-          className={`${className} cursor-pointer`}
-          height={100}
-          sizes="100vw"
-          src={src}
-          style={{
-            width: "100%",
-            height: "auto",
-          }}
-          width={500}
-        />
+        <div>
+          <Skeleton
+            className={`relative aspect-square rounded-md ${imageLoading ? "flex" : "hidden"}`}
+          />
+          <Image
+            {...props}
+            alt={alt || ""}
+            className={`cursor-pointer rounded-md object-cover ${imageLoading ? "hidden" : "flex"}`}
+            height={100}
+            loading="eager"
+            sizes="100vw"
+            src={src}
+            style={{
+              width: "100%",
+              height: "auto",
+            }}
+            width={500}
+            onLoad={()=> setImageLoading(false)}
+          />
+        </div>
       </DialogTrigger>
       <DialogContent
         className="max-w-7xl border-0 bg-transparent p-0 shadow-none outline-none"
