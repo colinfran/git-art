@@ -1,5 +1,5 @@
 "use client"
-import React, { FC } from "react"
+import React, { FC, useEffect, useState } from "react"
 import Image from "next/image"
 import { useTheme } from "next-themes"
 
@@ -8,8 +8,15 @@ type Props = {
 }
 
 const Icon: FC<Props> = ({ size = 32 }) => {
-  const { resolvedTheme: theme } = useTheme()
-  const isDark = theme === "dark"
+  const { resolvedTheme } = useTheme()
+  const [isDark, setIsDark] = useState(false)
+  useEffect(()=> {
+    if (resolvedTheme === "dark"){
+      setIsDark(true)
+    } else {
+      setIsDark(false)
+    }
+  }, [resolvedTheme])
   return (
     <Image
       alt="logo"
@@ -17,6 +24,7 @@ const Icon: FC<Props> = ({ size = 32 }) => {
       height={size}
       src={"/icon.png"}
       width={size}
+      suppressHydrationWarning
     />
   )
 }
