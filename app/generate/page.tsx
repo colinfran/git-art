@@ -8,16 +8,19 @@ import { Session } from "next-auth"
 import Loader from "@/components/loader"
 import { useRouter } from "next/navigation"
 
+type ImageDataProps = {
+  url?: string
+  outOfCredits?: boolean
+  error: boolean
+}
+
 const Page: FC = () => {
   const router = useRouter()
   const { data: untypedSession } = useSession()
-  const [imageData, setImageData] = useState<{
-    url?: string
-    outOfCredits?: boolean
-    error: boolean
-  }>({ error: false })
+  const [imageData, setImageData] = useState<ImageDataProps>({ error: false })
   const session = untypedSession as Session & { user: { gitId?: string; login?: string } }
   const [isLoading, setIsLoading] = useState(true)
+
   useEffect(() => {
     async function loadImage(): Promise<void> {
       try {
@@ -70,12 +73,14 @@ const Page: FC = () => {
                   </div>
                 </div>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  alt="new generated art"
-                  className={`${isLoading ? "hidden" : ""} mx-auto size-[75vw] rounded-lg shadow-lg md:size-[75vh]`}
-                  src={imageData.url || "/placeholder.svg"}
-                  onLoad={() => setIsLoading(false)}
-                />
+                {imageData?.url && (
+                  <img
+                    alt="new generated art"
+                    className={`${isLoading ? "hidden" : ""} mx-auto size-[75vw] rounded-lg shadow-lg md:size-[75vh]`}
+                    src={imageData.url}
+                    onLoad={() => setIsLoading(false)}
+                  />
+                  )}
               </>
             )}
           </div>
