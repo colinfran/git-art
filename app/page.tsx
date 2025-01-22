@@ -5,7 +5,6 @@ import { Card, CardDescription, CardFooter, CardHeader } from "@/components/ui/c
 import { Github, Loader2 } from "lucide-react"
 import { authenticate } from "@/lib/auth/actions"
 import Link from "next/link"
-import { Logo } from "@/components/icons"
 import Icon from "@/components/icon"
 
 const Page: FC = () => {
