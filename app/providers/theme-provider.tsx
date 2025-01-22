@@ -3,10 +3,7 @@
 import React, { FC, ReactNode } from "react"
 import { ThemeProvider as NextThemesProvider } from "next-themes"
 
-type Props = typeof NextThemesProvider & {
-  children: ReactNode
-}
-
-export const ThemeProvider: FC<Props> = ({ children, ...props }) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const ThemeProvider: FC<any> = ({ children, ...props }) => {
   return <NextThemesProvider {...props}>{children}</NextThemesProvider>
 }
