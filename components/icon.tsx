@@ -11,7 +11,7 @@ const Icon: FC<Props> = ({ size = 32 }) => {
   const { resolvedTheme: theme } = useTheme()
   const isDark = theme === "dark"
   return (
-    <Image alt="logo" className={isDark ? "invert" : ""} height={32} src={"/icon.png"} width={32} />
+    <Image alt="logo" className={isDark ? "invert" : ""} height={size} src={"/icon.png"} width={size} />
   )
 }
 
