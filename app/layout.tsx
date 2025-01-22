@@ -4,7 +4,6 @@ import { Analytics } from "@vercel/analytics/react"
 import Providers from "./providers"
 import { auth } from "@/lib/auth/index"
 import Header from "@/components/header"
-import NextTopLoader from 'nextjs-toploader';
 import { TopLoader } from "@/components/top-loader"
 
 type Props = {
