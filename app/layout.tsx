@@ -4,6 +4,8 @@ import { Analytics } from "@vercel/analytics/react"
 import Providers from "./providers"
 import { auth } from "@/lib/auth/index"
 import Header from "@/components/header"
+import NextTopLoader from 'nextjs-toploader';
+import { TopLoader } from "@/components/top-loader"
 
 type Props = {
   children: ReactNode
@@ -55,6 +57,7 @@ const RootLayout: FC<Props> = async ({ children }) => {
         <meta content="Visual representation of GitHub activity" property="twitter:image:alt" />
       </head>
       <body className="flex min-h-screen w-full flex-col">
+        <TopLoader />
         <Providers session={session}>
           <main className="flex min-h-screen w-full flex-col">
             <div className="flex flex-col sm:gap-4 sm:px-7 sm:py-4">
