@@ -118,6 +118,10 @@ input[type='search']::-ms-clear {
     dashOffset 4s linear infinite;
 }
 
+.dark .loader path {
+  stroke: #fff;
+}
+
 @keyframes dashArray {
   0% {
     stroke-dasharray: 0 1 359 0;
