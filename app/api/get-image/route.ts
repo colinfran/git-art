@@ -1,4 +1,5 @@
 import { addImage } from "@/lib/db/images/tasks"
+import { addRequest, checkIfRequestExists, removeRequest } from "@/lib/db/requests/tasks"
 import { getCreditsCount, updateCreditsCount } from "@/lib/db/users/tasks"
 import { fetchCommitsForUser } from "@/lib/git/tasks"
 import { uploadImage } from "@/lib/images/task"
@@ -7,6 +8,11 @@ import { NextRequest, NextResponse } from "next/server"
 
 export const POST = async (req: NextRequest): Promise<NextResponse> => {
   const data = await req.json()
+  const requestAlreadyInProgress = await checkIfRequestExists(data.email)
+  if (requestAlreadyInProgress) {
+    return NextResponse.json({ requestAlreadyInProgress: true })
+  }
+  await addRequest(data.email)
   // check if user has enough credits to generate new image
   const creditsCount = await getCreditsCount(data)
   if (creditsCount === 0) {
@@ -24,5 +30,6 @@ export const POST = async (req: NextRequest): Promise<NextResponse> => {
     await addImage(data.gitId, url)
     await updateCreditsCount(data, -1)
   }
+  await removeRequest(data.email)
   return NextResponse.json({ image: image })
 }

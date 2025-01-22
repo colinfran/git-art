@@ -11,7 +11,8 @@ import { useRouter } from "next/navigation"
 type ImageDataProps = {
   url?: string
   outOfCredits?: boolean
-  error: boolean
+  requestAlreadyInProgress?: boolean
+  error?: boolean
 }
 
 const Page: FC = () => {
@@ -29,17 +30,21 @@ const Page: FC = () => {
           body: JSON.stringify({ ...session?.user }),
         })
         const result = await response.json()
+        if (result?.requestAlreadyInProgress) {
+          setImageData({ requestAlreadyInProgress: true })
+          setIsLoading(false)
+        }
         if (result?.outOfCredits) {
-          setImageData({ url: "", outOfCredits: true, error: false })
+          setImageData({ outOfCredits: true })
           setIsLoading(false)
         }
         if (result?.image?.data[0].url) {
-          setImageData({ url: result.image.data[0].url, outOfCredits: false, error: false })
+          setImageData({ url: result.image.data[0].url })
           router.refresh()
         }
       } catch (error) {
         console.error("Failed to generate image:", error)
-        setImageData({ error: true, url: "", outOfCredits: false })
+        setImageData({ error: true })
         setIsLoading(false)
       }
     }
@@ -58,11 +63,15 @@ const Page: FC = () => {
           </p>
         ) : (
           <div className="space-y-4">
-            {imageData.outOfCredits ? (
+            {imageData.outOfCredits || imageData.requestAlreadyInProgress ? (
               <div className="text-center">
-                You have ran out of image generation credits.
+                {imageData.outOfCredits && "You have ran out of image generation credits."}
+                {imageData.requestAlreadyInProgress &&
+                  "There is currently an image being generated."}
                 <br />
-                Please purchase more credits and try again.
+                {imageData.outOfCredits && "Please purchase more credits and try again."}
+                {imageData.requestAlreadyInProgress &&
+                  "Please wait a minute to generate another image."}
               </div>
             ) : (
               <>
