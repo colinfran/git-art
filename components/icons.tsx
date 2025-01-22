@@ -93,10 +93,20 @@ export const Spinner: FC = () => {
 
 type LogoProps = {
   size?: number
+  dark?: boolean
 }
 
-export const Logo: FC<LogoProps> = ({ size = 32 }) => {
-  return <Image alt="logo" height={size} src="/icon.png" width={size} />
+export const Logo: FC<LogoProps> = ({ size = 32, dark }) => {
+  return (
+    <Image
+      alt="logo"
+      className={dark ? "" : "invert"}
+      height={size}
+      src={"/icon.png"}
+      width={size}
+      suppressHydrationWarning
+    />
+  )
 }
 
 export const VercelLogo: FC<Props> = (props) => {

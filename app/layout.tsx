@@ -12,7 +12,7 @@ type Props = {
 const RootLayout: FC<Props> = async ({ children }) => {
   const session = await auth()
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link href="/apple-icon-180x180.png" rel="apple-touch-icon" sizes="180x180" />
         <link href="/android-icon-192x192.png" rel="icon" sizes="192x192" type="image/png" />

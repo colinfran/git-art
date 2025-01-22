@@ -12,6 +12,7 @@ import {
 import LogOutButton from "@/components/log-out-button"
 import Link from "next/link"
 import { ImageIcon, ShoppingCartIcon } from "lucide-react"
+import ThemeButton from "./theme-button"
 
 const HeaderDropdown: FC = async () => {
   const session = await auth()
@@ -50,6 +51,8 @@ const HeaderDropdown: FC = async () => {
               <span>Purchase Credits</span>
             </Link>
           </DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <ThemeButton />
           <DropdownMenuSeparator />
           <DropdownMenuItem>
             <LogOutButton />
