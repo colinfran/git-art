@@ -6,6 +6,7 @@ import { Github, Loader2 } from "lucide-react"
 import { authenticate } from "@/lib/auth/actions"
 import Link from "next/link"
 import { Logo } from "@/components/icons"
+import Icon from "@/components/icon"
 
 const Page: FC = () => {
   const [loading, setLoading] = useState(false)
@@ -17,7 +18,7 @@ const Page: FC = () => {
   return (
     <div className="mx-[2px] flex flex-col items-start p-8 md:items-center">
       <div className="flex w-full justify-center">
-        <Logo size={108} />
+        <Icon size={108} />
       </div>
       <h1 className="mb-6 w-full text-center text-3xl font-bold">GitArt</h1>
       <h3 className="mx-auto mb-6 max-w-[400px] text-center">

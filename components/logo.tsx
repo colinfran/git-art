@@ -1,7 +1,7 @@
 import React, { FC } from "react"
 import Link from "next/link"
 import { auth } from "@/lib/auth/index"
-import IconWrapper from "./icon-wrapper"
+import Icon from "./icon"
 
 export const Logo: FC = async () => {
   const session = await auth()
@@ -9,7 +9,7 @@ export const Logo: FC = async () => {
 
   return (
     <Link href={user ? "/home" : "/"}>
-      <IconWrapper />
+      <Icon />
     </Link>
   )
 }
