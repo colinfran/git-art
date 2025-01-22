@@ -12,8 +12,8 @@ const Page: FC = () => {
   const router = useRouter()
   const { data: untypedSession } = useSession()
   const [imageData, setImageData] = useState<{
-    url: string
-    outOfCredits: boolean
+    url?: string
+    outOfCredits?: boolean
     error: boolean
   }>({ error: false })
   const session = untypedSession as Session & { user: { gitId?: string; login?: string } }
