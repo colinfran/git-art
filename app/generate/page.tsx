@@ -80,7 +80,7 @@ const Page: FC = () => {
                     src={imageData.url}
                     onLoad={() => setIsLoading(false)}
                   />
-                  )}
+                )}
               </>
             )}
           </div>
