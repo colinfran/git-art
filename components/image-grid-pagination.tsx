@@ -1,11 +1,12 @@
 "use client"
 
-import React, { FC, useState } from "react"
+import React, { FC, useEffect, useRef, useState } from "react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import Link from "next/link"
 import ZoomableImage from "./zoomable-image"
+import { useRouter, useSearchParams } from "next/navigation"
 
 const ITEMS_PER_PAGE = 6
 
@@ -18,6 +19,18 @@ const ImageGridPagination: FC<Props> = ({ images }) => {
   const totalPages = Math.ceil(images.length / ITEMS_PER_PAGE)
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE
   const visibleImages = images.slice(startIndex, startIndex + ITEMS_PER_PAGE)
+  const searchParams = useSearchParams()
+  const router = useRouter()
+  const firstImageRef = useRef<HTMLDivElement | null>(null) // Ref to first image div
+
+  const newImage = searchParams.has("new-image")
+
+  useEffect(() => {
+    if (newImage) {
+      router.replace(window.location.pathname)
+      firstImageRef?.current?.click()
+    }
+  }, [newImage])
 
   return (
     <div className="space-y-4">
@@ -42,7 +55,11 @@ const ImageGridPagination: FC<Props> = ({ images }) => {
           )}
           {visibleImages.map((image, index) => (
             <div className="relative aspect-square" key={`${image}-${index}`}>
-              <ZoomableImage alt={`Generated image ${image}`} src={image || "/placeholder.svg"} />
+              <ZoomableImage
+                alt={`Generated image ${image}`}
+                firstImageRef={index === 0 ? firstImageRef : undefined}
+                src={image || "/placeholder.svg"}
+              />
             </div>
           ))}
         </div>

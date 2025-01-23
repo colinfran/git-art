@@ -76,7 +76,11 @@ export const ImageProvider: FC<ImageProviderProps> = ({ children }) => {
               <p className="text-sm text-gray-500">View your git commit art!</p>
             </div>
             <Button className="self-center" asChild>
-              <Link className="min-w-fit" href="/images" onClick={() => toast.dismiss("toast")}>
+              <Link
+                className="min-w-fit"
+                href="/images?new-image=true"
+                onClick={() => toast.dismiss("toast")}
+              >
                 View
               </Link>
             </Button>

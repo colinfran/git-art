@@ -1,6 +1,6 @@
 "use client"
 
-import React, { FC, useState } from "react"
+import React, { FC, Ref, useState } from "react"
 import { Dialog, DialogContent, DialogFooter, DialogTitle, DialogTrigger } from "./ui/image-dialog"
 import Image, { ImageProps } from "next/image"
 import { Button } from "./ui/button"
@@ -8,7 +8,11 @@ import { DownloadIcon, Loader2 } from "lucide-react"
 import uniqid from "uniqid"
 import { Skeleton } from "./ui/skeleton"
 
-const ZoomableImage: FC<ImageProps> = ({ src, alt, ...props }) => {
+type Props = ImageProps & {
+  firstImageRef?: Ref<HTMLDivElement>
+}
+
+const ZoomableImage: FC<Props> = ({ src, alt, firstImageRef, ...props }) => {
   const [loading, setLoading] = useState(false)
   const [imageLoading, setImageLoading] = useState(true)
 
@@ -39,7 +43,7 @@ const ZoomableImage: FC<ImageProps> = ({ src, alt, ...props }) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <div>
+        <div ref={firstImageRef}>
           <Skeleton
             className={`relative aspect-square rounded-md ${imageLoading ? "flex" : "hidden"}`}
           />
