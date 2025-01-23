@@ -87,14 +87,18 @@ const Page: FC = () => {
               </>
             )}
             <div>
-            <Button
-              className={`mx-auto flex w-[200px] flex-row gap-2 ${imageData.url ? "" : "invisible"}`}
-              disabled={loading && isLoading}
-              onClick={handleDownload}
-            >
-              {isLoading ? <Loader2 className="animate-spin" size={16} /> : <DownloadIcon size={16} />}
-              <span>Download</span>
-            </Button>
+              <Button
+                className={`mx-auto flex w-[200px] flex-row gap-2 ${imageData.url ? "" : "invisible"}`}
+                disabled={loading && isLoading}
+                onClick={handleDownload}
+              >
+                {isLoading ? (
+                  <Loader2 className="animate-spin" size={16} />
+                ) : (
+                  <DownloadIcon size={16} />
+                )}
+                <span>Download</span>
+              </Button>
             </div>
           </div>
         )}
