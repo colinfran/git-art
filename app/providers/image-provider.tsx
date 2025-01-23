@@ -38,7 +38,7 @@ export const ImageProvider: FC<ImageProviderProps> = ({ children }) => {
   const { data: session } = useSession()
   const [imageData, setImageData] = useState<ImageDataProps>({ error: false })
 
-  const [_status, setStatus] = useLocalStorage("image-generation-status", "")
+  const [status, setStatus] = useLocalStorage("image-generation-status", "")
   const [isReloaded, setIsReloaded] = useLocalStorage("reloaded", "")
 
   const setReloaded = (): void => {
@@ -148,11 +148,11 @@ export const ImageProvider: FC<ImageProviderProps> = ({ children }) => {
         method: "POST",
         body: JSON.stringify({ ...session?.user }),
       })
-      const { status } = await response.json()
-      if (status === "in progress") {
+      const { status: resp } = await response.json()
+      if (resp === "in progress") {
         triggerLoadingToast()
       }
-      if (status === "done") {
+      if (resp === "done") {
         triggerDoneToast()
         router.refresh()
         setStatus("")
