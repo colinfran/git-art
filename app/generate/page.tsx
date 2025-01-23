@@ -8,12 +8,13 @@ import Loader from "@/components/loader"
 import { useImage } from "app/providers/image-provider"
 
 const Page: FC = () => {
-  const { loading, setLoading, generateNewImage, imageData } = useImage()
+  const { loading, setLoading, generateNewImage, imageData, setIsRequestGenerate } = useImage()
   const { data: session } = useSession()
 
   useEffect(() => {
     if (session?.user) {
       generateNewImage()
+      setIsRequestGenerate(true)
     }
   }, [session])
 

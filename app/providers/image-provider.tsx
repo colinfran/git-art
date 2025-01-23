@@ -15,6 +15,7 @@ interface ImageContextType {
   imageData: ImageDataProps
   setImageData: (value: ImageDataProps) => void
   generateNewImage: () => Promise<void>
+  setIsRequestGenerate: (value: boolean) => void
 }
 
 const ImageContext = createContext<ImageContextType | undefined>(undefined)
@@ -37,27 +38,62 @@ export const ImageProvider: FC<ImageProviderProps> = ({ children }) => {
   const { data: session } = useSession()
   const [imageData, setImageData] = useState<ImageDataProps>({ error: false })
 
-  async function generateNewImage(): Promise<void> {
-    try {
-      setImageData({ error: false })
-      toast(
-        () => (
-          <div className="flex w-full flex-row items-center gap-4 p-4">
-            <Loader2 className="animate-spin" />
-            <div className="flex w-full flex-row gap-4">
-              <div className="w-full">
-                <div className="mb-2 flex items-center space-x-2">
-                  <span className="text-sm font-medium text-gray-900">
-                    Image generation is currently in progress
-                  </span>
-                </div>
-                <p className="text-sm text-gray-500">Please wait.</p>
+  const [_isRequestGenerate, setIsRequestGenerate] = useState(false)
+
+  const triggerLoadingToast = (): void => {
+    toast(
+      () => (
+        <div className="flex w-full flex-row items-center gap-4 p-4">
+          <Loader2 className="animate-spin" />
+          <div className="flex w-full flex-row gap-4">
+            <div className="w-full">
+              <div className="mb-2 flex items-center space-x-2">
+                <span className="text-sm font-medium text-gray-900">
+                  Image generation is currently in progress
+                </span>
               </div>
+              <p className="text-sm text-gray-500">Please wait.</p>
             </div>
           </div>
-        ),
-        { toastId: "toast", autoClose: false, closeButton: false },
-      )
+        </div>
+      ),
+      { toastId: "toast", autoClose: false, closeButton: false },
+    )
+  }
+
+  const triggerDoneToast = (): void => {
+    toast.update("toast", {
+      render: () => (
+        <div className="flex w-full flex-row items-center gap-4 p-4">
+          <CheckCircle className="text-green-500" />
+          <div className="flex w-full flex-row gap-4">
+            <div className="w-full">
+              <div className="mb-2 flex items-center space-x-2">
+                <span className="text-sm font-medium text-gray-900">
+                  Image generation has completed
+                </span>
+              </div>
+              <p className="text-sm text-gray-500">View your git commit art!</p>
+            </div>
+            <Button className="self-center" asChild>
+              <Link className="min-w-fit" href="/images" onClick={() => toast.dismiss("toast")}>
+                View
+              </Link>
+            </Button>
+          </div>
+        </div>
+      ),
+      hideProgressBar: true,
+      autoClose: false,
+      closeButton: true,
+      className: "w-[400px]",
+    })
+  }
+
+  const generateNewImage = async (): Promise<void> => {
+    try {
+      triggerLoadingToast()
+      setImageData({ error: false })
       const response = await fetch("/api/image/generate", {
         method: "POST",
         body: JSON.stringify({ ...session?.user }),
@@ -73,37 +109,8 @@ export const ImageProvider: FC<ImageProviderProps> = ({ children }) => {
       }
       if (result?.image?.data[0].url) {
         setImageData({ url: result.image.data[0].url })
+        triggerDoneToast()
         router.refresh()
-        toast.update("toast", {
-          render: () => (
-            <div className="flex w-full flex-row items-center gap-4 p-4">
-              <CheckCircle className="text-green-500" />
-              <div className="flex w-full flex-row gap-4">
-                <div className="w-full">
-                  <div className="mb-2 flex items-center space-x-2">
-                    <span className="text-sm font-medium text-gray-900">
-                      Image generation has completed
-                    </span>
-                  </div>
-                  <p className="text-sm text-gray-500">View your git commit art!</p>
-                </div>
-                <Button className="self-center" asChild>
-                  <Link
-                    className="min-w-fit"
-                    href="/images"
-                    onClick={() => toast.dismiss("done-toast")}
-                  >
-                    View
-                  </Link>
-                </Button>
-              </div>
-            </div>
-          ),
-          hideProgressBar: true,
-          autoClose: false,
-          closeButton: true,
-          className: "w-[400px]",
-        })
       }
     } catch (error) {
       console.error("Failed to generate image:", error)
@@ -112,9 +119,36 @@ export const ImageProvider: FC<ImageProviderProps> = ({ children }) => {
     }
   }
 
+  // const getStatus = async (): Promise<void> => {
+  //   try {
+  //     const response = await fetch("/api/image/status", {
+  //       method: "POST",
+  //       body: JSON.stringify({ ...session?.user }),
+  //     })
+  //     const { status } = await response.json()
+  //     if (status === "in progress"){
+  //       triggerLoadingToast()
+  //     }
+  //     if (status === "done"){
+  //       triggerLoadingToast()
+  //       triggerDoneToast()
+  //       router.refresh()
+  //     }
+  //   } catch (error) {
+  //     console.error(error)
+  //   }
+  // }
+
   return (
     <ImageContext.Provider
-      value={{ loading, setLoading, imageData, setImageData, generateNewImage }}
+      value={{
+        loading,
+        setLoading,
+        imageData,
+        setImageData,
+        generateNewImage,
+        setIsRequestGenerate,
+      }}
     >
       {children}
     </ImageContext.Provider>
