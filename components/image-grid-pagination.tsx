@@ -71,8 +71,8 @@ const ImageGridPagination: FC<Props> = ({ images }) => {
           variant="outline"
           onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
         >
-          <ChevronLeft className="mr-2 size-4" />
-          Previous
+          <ChevronLeft className="size-4" />
+          <span className="sr-only">Previous</span>
         </Button>
         <span className="text-sm text-muted-foreground">
           Page {currentPage} of {totalPages}
@@ -83,8 +83,8 @@ const ImageGridPagination: FC<Props> = ({ images }) => {
           variant="outline"
           onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
         >
-          Next
-          <ChevronRight className="ml-2 size-4" />
+          <span className="sr-only">Next</span>
+          <ChevronRight className="size-4" />
         </Button>
       </div>
     </div>
