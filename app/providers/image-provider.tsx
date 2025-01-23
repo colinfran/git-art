@@ -71,7 +71,13 @@ export const ImageProvider: FC<ImageProviderProps> = ({ children }) => {
           </div>
         </div>
       ),
-      { toastId: "toast", autoClose: false, closeButton: false, draggable: false, theme: resolvedTheme},
+      {
+        toastId: "toast",
+        autoClose: false,
+        closeButton: false,
+        draggable: false,
+        theme: resolvedTheme,
+      },
     )
   }
 
@@ -83,9 +89,7 @@ export const ImageProvider: FC<ImageProviderProps> = ({ children }) => {
           <div className="flex w-full flex-row gap-4">
             <div className="w-full">
               <div className="mb-2 flex items-center space-x-2">
-                <span className="text-sm font-medium">
-                  Image generation has completed
-                </span>
+                <span className="text-sm font-medium">Image generation has completed</span>
               </div>
               <p className="text-sm">View your git commit art!</p>
             </div>
@@ -105,7 +109,7 @@ export const ImageProvider: FC<ImageProviderProps> = ({ children }) => {
       autoClose: false,
       closeButton: true,
       className: "w-[400px]",
-      theme: resolvedTheme
+      theme: resolvedTheme,
     })
   }
 
