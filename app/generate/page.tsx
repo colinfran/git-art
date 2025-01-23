@@ -7,6 +7,9 @@ import { useSession } from "next-auth/react"
 import { Session } from "next-auth"
 import Loader from "@/components/loader"
 import { useRouter } from "next/navigation"
+import { useImageStatus } from "app/providers/image-status-provider"
+import { toast } from "react-toastify"
+import { Loader2 } from "lucide-react"
 
 type ImageDataProps = {
   url?: string
@@ -21,11 +24,31 @@ const Page: FC = () => {
   const [imageData, setImageData] = useState<ImageDataProps>({ error: false })
   const session = untypedSession as Session & { user: { gitId?: string; login?: string } }
   const [isLoading, setIsLoading] = useState(true)
+  const { setShouldFetchStatus } = useImageStatus()
 
   useEffect(() => {
     async function loadImage(): Promise<void> {
       try {
-        const response = await fetch("/api/get-image", {
+        setShouldFetchStatus(true)
+        toast(
+          () => (
+            <div className="flex w-full flex-row items-center gap-4 p-4">
+              <Loader2 className="animate-spin text-blue-500" />
+              <div className="flex w-full flex-row gap-4">
+                <div className="w-full">
+                  <div className="mb-2 flex items-center space-x-2">
+                    <span className="text-sm font-medium text-gray-900">
+                      Image generation is currently in progress
+                    </span>
+                  </div>
+                  <p className="text-sm text-gray-500">Please wait.</p>
+                </div>
+              </div>
+            </div>
+          ),
+          { toastId: "in-progress-toast", autoClose: false, closeButton: false },
+        )
+        const response = await fetch("/api/image/generate", {
           method: "POST",
           body: JSON.stringify({ ...session?.user }),
         })
@@ -37,6 +60,7 @@ const Page: FC = () => {
         if (result?.outOfCredits) {
           setImageData({ outOfCredits: true })
           setIsLoading(false)
+          setShouldFetchStatus(false)
         }
         if (result?.image?.data[0].url) {
           setImageData({ url: result.image.data[0].url })
@@ -46,6 +70,7 @@ const Page: FC = () => {
         console.error("Failed to generate image:", error)
         setImageData({ error: true })
         setIsLoading(false)
+        setShouldFetchStatus(false)
       }
     }
 
@@ -81,8 +106,8 @@ const Page: FC = () => {
                     <Loader />
                   </div>
                 </div>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
                 {imageData?.url && (
+                  // eslint-disable-next-line @next/next/no-img-element
                   <img
                     alt="new generated art"
                     className={`${isLoading ? "hidden" : ""} mx-auto size-[75vw] rounded-lg shadow-lg md:size-[75vh]`}

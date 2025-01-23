@@ -5,6 +5,8 @@ import Providers from "./providers"
 import { auth } from "@/lib/auth/index"
 import Header from "@/components/header"
 import NextTopLoader from "nextjs-toploader"
+// import { Toaster } from "@/components/ui/toaster"
+import { ToastContainer } from "react-toastify"
 
 type Props = {
   children: ReactNode
@@ -65,6 +67,7 @@ const RootLayout: FC<Props> = async ({ children }) => {
             </div>
           </main>
         </Providers>
+        <ToastContainer />
       </body>
       <Analytics />
     </html>
