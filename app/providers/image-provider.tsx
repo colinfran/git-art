@@ -8,6 +8,7 @@ import Link from "next/link"
 import { toast } from "react-toastify"
 import { useRouter } from "next/navigation"
 import useLocalStorage from "use-local-storage"
+import { useTheme } from "next-themes"
 
 // Define types for context values
 interface ImageContextType {
@@ -32,6 +33,7 @@ type ImageDataProps = {
 }
 
 export const ImageProvider: FC<ImageProviderProps> = ({ children }) => {
+  const { resolvedTheme } = useTheme()
   const router = useRouter()
   const [loading, setLoading] = useState<boolean>(true) // For loading state
 
@@ -60,16 +62,16 @@ export const ImageProvider: FC<ImageProviderProps> = ({ children }) => {
           <div className="flex w-full flex-row gap-4">
             <div className="w-full">
               <div className="mb-2 flex items-center space-x-2">
-                <span className="text-sm font-medium text-gray-900">
+                <span className="text-sm font-medium">
                   Image generation is currently in progress
                 </span>
               </div>
-              <p className="text-sm text-gray-500">Please wait.</p>
+              <p className="text-sm">Please wait.</p>
             </div>
           </div>
         </div>
       ),
-      { toastId: "toast", autoClose: false, closeButton: false },
+      { toastId: "toast", autoClose: false, closeButton: false, draggable: false, theme: resolvedTheme},
     )
   }
 
@@ -81,11 +83,11 @@ export const ImageProvider: FC<ImageProviderProps> = ({ children }) => {
           <div className="flex w-full flex-row gap-4">
             <div className="w-full">
               <div className="mb-2 flex items-center space-x-2">
-                <span className="text-sm font-medium text-gray-900">
+                <span className="text-sm font-medium">
                   Image generation has completed
                 </span>
               </div>
-              <p className="text-sm text-gray-500">View your git commit art!</p>
+              <p className="text-sm">View your git commit art!</p>
             </div>
             <Button className="self-center" asChild>
               <Link
@@ -103,6 +105,7 @@ export const ImageProvider: FC<ImageProviderProps> = ({ children }) => {
       autoClose: false,
       closeButton: true,
       className: "w-[400px]",
+      theme: resolvedTheme
     })
   }
 
