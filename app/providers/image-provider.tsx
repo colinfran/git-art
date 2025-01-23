@@ -1,12 +1,13 @@
 // context/ImageContext.tsx
 "use client"
-import React, { createContext, useState, useContext, ReactNode, FC } from "react"
+import React, { createContext, useState, useContext, ReactNode, FC, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { CheckCircle, Loader2 } from "lucide-react"
 import { useSession } from "next-auth/react"
 import Link from "next/link"
 import { toast } from "react-toastify"
 import { useRouter } from "next/navigation"
+import useLocalStorage from "use-local-storage"
 
 // Define types for context values
 interface ImageContextType {
@@ -15,7 +16,6 @@ interface ImageContextType {
   imageData: ImageDataProps
   setImageData: (value: ImageDataProps) => void
   generateNewImage: () => Promise<void>
-  setIsRequestGenerate: (value: boolean) => void
 }
 
 const ImageContext = createContext<ImageContextType | undefined>(undefined)
@@ -38,7 +38,19 @@ export const ImageProvider: FC<ImageProviderProps> = ({ children }) => {
   const { data: session } = useSession()
   const [imageData, setImageData] = useState<ImageDataProps>({ error: false })
 
-  const [_isRequestGenerate, setIsRequestGenerate] = useState(false)
+  const [_status, setStatus] = useLocalStorage("image-generation-status", "")
+  const [isReloaded, setIsReloaded] = useLocalStorage("reloaded", "")
+
+  const setReloaded = (): void => {
+    setIsReloaded("true")
+  }
+
+  useEffect(() => {
+    window.addEventListener("beforeunload", setReloaded)
+    return () => {
+      window.removeEventListener("beforeunload", setReloaded)
+    }
+  }, [])
 
   const triggerLoadingToast = (): void => {
     toast(
@@ -96,6 +108,7 @@ export const ImageProvider: FC<ImageProviderProps> = ({ children }) => {
 
   const generateNewImage = async (): Promise<void> => {
     try {
+      setIsReloaded("")
       triggerLoadingToast()
       setImageData({ error: false })
       const response = await fetch("/api/image/generate", {
@@ -106,15 +119,21 @@ export const ImageProvider: FC<ImageProviderProps> = ({ children }) => {
       if (result?.requestAlreadyInProgress) {
         setImageData({ requestAlreadyInProgress: true })
         setLoading(false)
+        setStatus("")
+        setIsReloaded("")
       }
       if (result?.outOfCredits) {
         setImageData({ outOfCredits: true })
         setLoading(false)
+        setStatus("")
+        setIsReloaded("")
       }
       if (result?.image?.data[0].url) {
         setImageData({ url: result.image.data[0].url })
         triggerDoneToast()
         router.refresh()
+        setStatus("")
+        setIsReloaded("")
       }
     } catch (error) {
       console.error("Failed to generate image:", error)
@@ -123,25 +142,36 @@ export const ImageProvider: FC<ImageProviderProps> = ({ children }) => {
     }
   }
 
-  // const getStatus = async (): Promise<void> => {
-  //   try {
-  //     const response = await fetch("/api/image/status", {
-  //       method: "POST",
-  //       body: JSON.stringify({ ...session?.user }),
-  //     })
-  //     const { status } = await response.json()
-  //     if (status === "in progress"){
-  //       triggerLoadingToast()
-  //     }
-  //     if (status === "done"){
-  //       triggerLoadingToast()
-  //       triggerDoneToast()
-  //       router.refresh()
-  //     }
-  //   } catch (error) {
-  //     console.error(error)
-  //   }
-  // }
+  const getStatus = async (): Promise<void> => {
+    try {
+      const response = await fetch("/api/image/status", {
+        method: "POST",
+        body: JSON.stringify({ ...session?.user }),
+      })
+      const { status } = await response.json()
+      if (status === "in progress") {
+        triggerLoadingToast()
+      }
+      if (status === "done") {
+        triggerDoneToast()
+        router.refresh()
+        setStatus("")
+        setIsReloaded("")
+      }
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  useEffect(() => {
+    let interval: ReturnType<typeof setInterval> | undefined
+    if (status === "generating" && isReloaded) {
+      interval = setInterval(async () => {
+        await getStatus()
+      }, 1000)
+    }
+    return () => clearInterval(interval)
+  }, [status, isReloaded])
 
   return (
     <ImageContext.Provider
@@ -151,7 +181,6 @@ export const ImageProvider: FC<ImageProviderProps> = ({ children }) => {
         imageData,
         setImageData,
         generateNewImage,
-        setIsRequestGenerate,
       }}
     >
       {children}

@@ -6,15 +6,19 @@ import { Skeleton } from "@/components/ui/skeleton"
 import { useSession } from "next-auth/react"
 import Loader from "@/components/loader"
 import { useImage } from "app/providers/image-provider"
+import useLocalStorage from "use-local-storage"
 
 const Page: FC = () => {
-  const { loading, setLoading, generateNewImage, imageData, setIsRequestGenerate } = useImage()
+  const { loading, setLoading, generateNewImage, imageData } = useImage()
   const { data: session } = useSession()
+  const [_status, setStatus] = useLocalStorage("image-generation-status", "")
+  const [_isReloaded, setIsReloaded] = useLocalStorage("reloaded", "")
 
   useEffect(() => {
     if (session?.user) {
+      setIsReloaded("")
       generateNewImage()
-      setIsRequestGenerate(true)
+      setStatus("generating")
     }
   }, [session])
 
