@@ -1,18 +1,22 @@
 "use client"
 /* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 
-import React, { FC, useEffect } from "react"
+import React, { FC, useEffect, useState } from "react"
 import { Skeleton } from "@/components/ui/skeleton"
 import { useSession } from "next-auth/react"
 import Loader from "@/components/loader"
 import { useImage } from "app/providers/image-provider"
 import useLocalStorage from "use-local-storage"
+import { Button } from "@/components/ui/button"
+import { DownloadIcon, Loader2 } from "lucide-react"
+import uniqid from "uniqid"
 
 const Page: FC = () => {
   const { loading, setLoading, generateNewImage, imageData } = useImage()
   const { data: session } = useSession()
   const [_status, setStatus] = useLocalStorage("image-generation-status", "")
   const [_isReloaded, setIsReloaded] = useLocalStorage("reloaded", "")
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
     if (session?.user) {
@@ -21,6 +25,28 @@ const Page: FC = () => {
       setStatus("generating")
     }
   }, [session])
+
+  const handleDownload = async (): Promise<void> => {
+    try {
+      setIsLoading(true)
+      const response = await fetch(imageData?.url as string)
+      if (!response.ok) {
+        throw new Error("Failed to fetch the image")
+      }
+      const blob = await response.blob()
+      const url = window.URL.createObjectURL(blob)
+      const link = document.createElement("a")
+      link.href = url
+      link.download = uniqid.time()
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+      window.URL.revokeObjectURL(url)
+      setIsLoading(false)
+    } catch (error) {
+      console.error("Download failed:", error)
+    }
+  }
 
   return (
     <div className="mx-[2px] mt-2 flex flex-col items-center justify-center gap-8 p-8">
@@ -60,6 +86,16 @@ const Page: FC = () => {
                 )}
               </>
             )}
+            <div>
+            <Button
+              className={`mx-auto flex w-[200px] flex-row gap-2 ${imageData.url ? "" : "invisible"}`}
+              disabled={loading && isLoading}
+              onClick={handleDownload}
+            >
+              {isLoading ? <Loader2 className="animate-spin" size={16} /> : <DownloadIcon size={16} />}
+              <span>Download</span>
+            </Button>
+            </div>
           </div>
         )}
       </div>
