@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import LogOutButton from "@/components/log-out-button"
 import Link from "next/link"
-import { ImageIcon, ShoppingCartIcon } from "lucide-react"
+import { ImageIcon, ShoppingCartIcon, HomeIcon } from "lucide-react"
 import ThemeButton from "./theme-button"
 
 const HeaderDropdown: FC = async () => {
@@ -33,6 +33,15 @@ const HeaderDropdown: FC = async () => {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
+          <DropdownMenuItem
+            className="flex w-full cursor-pointer flex-row items-center gap-2"
+            asChild
+          >
+            <Link href="/">
+              <HomeIcon size={16} />
+              <span>Home</span>
+            </Link>
+          </DropdownMenuItem>
           <DropdownMenuItem
             className="flex w-full cursor-pointer flex-row items-center gap-2"
             asChild
