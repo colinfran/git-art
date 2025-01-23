@@ -1,22 +1,18 @@
 "use client"
 /* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 
-import React, { FC, useEffect, useState } from "react"
+import React, { FC, useEffect } from "react"
 import { Skeleton } from "@/components/ui/skeleton"
 import { useSession } from "next-auth/react"
-import { Session } from "next-auth"
 import Loader from "@/components/loader"
-import { useRouter } from "next/navigation"
 import { useImage } from "app/providers/image-provider"
-import { toast } from "react-toastify"
-import { Loader2 } from "lucide-react"
 
 const Page: FC = () => {
   const { loading, setLoading, generateNewImage, imageData } = useImage()
   const { data: session } = useSession()
 
   useEffect(() => {
-    if (session?.user){
+    if (session?.user) {
       generateNewImage()
     }
   }, [session])

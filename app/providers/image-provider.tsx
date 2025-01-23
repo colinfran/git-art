@@ -1,6 +1,6 @@
 // context/ImageContext.tsx
 "use client"
-import React, { createContext, useState, useEffect, useContext, ReactNode, FC } from "react"
+import React, { createContext, useState, useContext, ReactNode, FC } from "react"
 import { Button } from "@/components/ui/button"
 import { CheckCircle, Loader2 } from "lucide-react"
 import { useSession } from "next-auth/react"
@@ -12,7 +12,7 @@ import { useRouter } from "next/navigation"
 interface ImageContextType {
   loading: boolean
   setLoading: (value: boolean) => void
-  imageData: ImageDataProps;
+  imageData: ImageDataProps
   setImageData: (value: ImageDataProps) => void
   generateNewImage: () => Promise<void>
 }
@@ -33,7 +33,7 @@ type ImageDataProps = {
 export const ImageProvider: FC<ImageProviderProps> = ({ children }) => {
   const router = useRouter()
   const [loading, setLoading] = useState<boolean>(true) // For loading state
-  
+
   const { data: session } = useSession()
   const [imageData, setImageData] = useState<ImageDataProps>({ error: false })
 
@@ -103,8 +103,7 @@ export const ImageProvider: FC<ImageProviderProps> = ({ children }) => {
           autoClose: false,
           closeButton: true,
           className: "w-[400px]",
-        }
-        )
+        })
       }
     } catch (error) {
       console.error("Failed to generate image:", error)
@@ -115,7 +114,7 @@ export const ImageProvider: FC<ImageProviderProps> = ({ children }) => {
 
   return (
     <ImageContext.Provider
-      value={{ loading, setLoading, imageData, setImageData,  generateNewImage, }}
+      value={{ loading, setLoading, imageData, setImageData, generateNewImage }}
     >
       {children}
     </ImageContext.Provider>
