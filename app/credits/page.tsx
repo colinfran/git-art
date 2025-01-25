@@ -14,11 +14,12 @@ import { auth } from "@/lib/auth"
 import { ShoppingCartIcon } from "lucide-react"
 import PurchaseAlert from "@/components/purchase-alert"
 import Link from "next/link"
+import { getAllPurchases } from "@/lib/db/purchases/tasks"
 
 const Page: FC = async () => {
   const session = await auth()
   const creditsCount = await getCreditsCount(session.user)
-
+  const purchaseHistory = await getAllPurchases(session.user)
   return (
     <div className="container mx-auto p-4">
       <div className="grid gap-8 md:grid-cols-2">
@@ -52,7 +53,7 @@ const Page: FC = async () => {
           </CardFooter>
         </Card>
       </div>
-      <PurchaseHistory />
+      <PurchaseHistory purchaseHistory={purchaseHistory}/>
       <PurchaseAlert />
       <footer className="mt-8 text-center text-sm text-gray-500">
         <Link className="hover:underline" href="/terms">
