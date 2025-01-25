@@ -1,9 +1,6 @@
-
 import React, { FC } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "./ui/table"
-import { auth } from "@/lib/auth"
-import { getAllPurchases } from "@/lib/db/purchases/tasks"
 
 type Purchase = {
   id: string
@@ -15,7 +12,6 @@ type Purchase = {
 type Props = {
   purchaseHistory: Purchase[]
 }
-
 
 const PurchaseHistory: FC<Props> = async ({ purchaseHistory }) => {
   return (

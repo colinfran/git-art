@@ -53,7 +53,7 @@ const Page: FC = async () => {
           </CardFooter>
         </Card>
       </div>
-      <PurchaseHistory purchaseHistory={purchaseHistory}/>
+      <PurchaseHistory purchaseHistory={purchaseHistory} />
       <PurchaseAlert />
       <footer className="mt-8 text-center text-sm text-gray-500">
         <Link className="hover:underline" href="/terms">
