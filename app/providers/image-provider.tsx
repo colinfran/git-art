@@ -38,10 +38,10 @@ type ImageDataProps =
 export const ImageProvider: FC<ImageProviderProps> = ({ children }) => {
   const { resolvedTheme } = useTheme()
   const router = useRouter()
-  const [loading, setLoading] = useState<boolean>(true) // For loading state
+  const [loading, setLoading] = useState<boolean>(false) // For loading state
 
   const { data: session } = useSession()
-  const [imageData, setImageData] = useState<ImageDataProps>({ error: false })
+  const [imageData, setImageData] = useState<ImageDataProps>(undefined)
 
   const [status, setStatus] = useLocalStorage("image-generation-status", "")
   const [isReloaded, setIsReloaded] = useLocalStorage("reloaded", "")
@@ -118,6 +118,7 @@ export const ImageProvider: FC<ImageProviderProps> = ({ children }) => {
 
   const generateNewImage = async (options: ArtOptions): Promise<void> => {
     try {
+      setLoading(true)
       setIsReloaded("")
       triggerLoadingToast()
       setImageData({ error: false })
@@ -129,7 +130,7 @@ export const ImageProvider: FC<ImageProviderProps> = ({ children }) => {
       if (result?.requestAlreadyInProgress) {
         setImageData({ requestAlreadyInProgress: true })
         setLoading(false)
-        setStatus("")
+        // setStatus("generating")
         setIsReloaded("")
       }
       if (result?.outOfCredits) {
@@ -142,7 +143,7 @@ export const ImageProvider: FC<ImageProviderProps> = ({ children }) => {
         setImageData({ url: result.image.data[0].url })
         triggerDoneToast()
         router.refresh()
-        setStatus("")
+        setStatus("done")
         setIsReloaded("")
       }
     } catch (error) {
@@ -161,12 +162,15 @@ export const ImageProvider: FC<ImageProviderProps> = ({ children }) => {
       const { status: resp } = await response.json()
       if (resp === "in progress") {
         triggerLoadingToast()
+        setStatus("generating")
+        setImageData({requestAlreadyInProgress: true})
       }
       if (resp === "done") {
         triggerDoneToast()
         router.refresh()
         setStatus("")
         setIsReloaded("")
+        setImageData({url: "refresh"})
       }
     } catch (error) {
       console.error(error)
