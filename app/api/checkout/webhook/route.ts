@@ -34,7 +34,6 @@ export const POST = async (req: Request): Promise<NextResponse> => {
         status: paymentStatus,
         sessionId: sessionId,
       }
-      console.log(data)
       await addPurchase(data)
       await updateCreditsCount(gitId, 10)
       return NextResponse.json({ status: 200 })
