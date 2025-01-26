@@ -6,7 +6,7 @@ import { purchases } from "./table"
 export const addPurchase = async (data: any): Promise<void> => {
   try {
     await db.insert(purchases).values({
-      email: data.email,
+      gitId: data.gitId,
       amount: 10,
       status: data.status,
       sessionId: data.sessionId,
@@ -21,7 +21,7 @@ export const getAllPurchases = async (data: any): Promise<any> => {
   const response = await db
     .select()
     .from(purchases)
-    .where(eq(purchases.email, data.email))
+    .where(eq(purchases.gitId, data.gitId))
     .orderBy(desc(purchases.date))
 
   return response

@@ -13,12 +13,12 @@ type NewUser = {
   gitId: string
 }
 
-export const doesUserExist = async (user: User): Promise<boolean | string> => {
+export const doesUserExist = async (user: NewUser): Promise<boolean | string> => {
   try {
     const existingUser = await db
       .select()
       .from(users)
-      .where(eq(users.username, user.login!))
+      .where(eq(users.gitId, user.gitId!))
       .limit(1)
     return existingUser && existingUser.length > 0
   } catch (error) {
@@ -41,7 +41,7 @@ export const getCreditsCount = async (user: User): Promise<number> => {
     const result = await db
       .select({ credits: users.credits })
       .from(users)
-      .where(eq(users.username, user.login!))
+      .where(eq(users.gitId, user.gitId))
     if (result.length > 0 && result[0].credits) {
       return result[0].credits
     } else {
@@ -53,12 +53,12 @@ export const getCreditsCount = async (user: User): Promise<number> => {
   }
 }
 
-export const updateCreditsCount = async (user: User, count: number): Promise<void> => {
+export const updateCreditsCount = async (gitId: string, count: number): Promise<void> => {
   try {
     await db
-      .update(users) // Use update instead of select
+      .update(users)
       .set({ credits: sql`${users.credits} + ${count}` })
-      .where(or(eq(users.username, user.login!), eq(users.email, user.email!))) // Update based on the username
+      .where(eq(users.gitId, gitId))
   } catch (error) {
     console.error("Error updating credits count", error)
   }

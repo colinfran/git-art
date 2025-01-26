@@ -45,7 +45,8 @@ const Page: FC = async () => {
           <CardFooter>
             <form action="/api/checkout" method="POST">
               <input name="email" type="hidden" value={session.user.email} />
-              <Button className="flex flex-row gap-2" type="submit">
+              <input name="gitId" type="hidden" value={session.user.gitId} />
+            <Button className="flex flex-row gap-2" type="submit">
                 <ShoppingCartIcon size={16} />
                 <span>Buy Now</span>
               </Button>

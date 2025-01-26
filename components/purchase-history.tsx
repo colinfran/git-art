@@ -27,7 +27,6 @@ const PurchaseHistory: FC<Props> = async ({ purchaseHistory }) => {
                 <TableRow>
                   <TableHead>Date</TableHead>
                   <TableHead>Amount</TableHead>
-                  <TableHead>Cost</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -35,7 +34,6 @@ const PurchaseHistory: FC<Props> = async ({ purchaseHistory }) => {
                   <TableRow key={purchase.id}>
                     <TableCell>{new Date(purchase.date).toLocaleString()}</TableCell>
                     <TableCell>{purchase.amount} Credits</TableCell>
-                    <TableCell>{purchase.cost}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>

@@ -131,7 +131,7 @@ const Page: FC = () => {
                                       <p className="text-sm">View your git commit art!</p>
                                     </div>
                                     <Button className="self-center" asChild>
-                                      <Link className="min-w-fit" href="/images?new-image=true">
+                                      <Link onClick={()=>toast.dismiss("toast")} className="min-w-fit" href="/images?new-image=true">
                                         View
                                       </Link>
                                     </Button>

@@ -26,19 +26,23 @@ export const POST = async (req: Request): Promise<NextResponse> => {
       const amountPaid = session.amount_total
       const paymentStatus = session.payment_status
       const sessionId = session.id
-
-      await addPurchase({
+      const gitId = session.metadata!.gitId
+      const data = {
+        gitId: gitId,
         email: customerEmail,
         amount: amountPaid,
         status: paymentStatus,
         sessionId: sessionId,
-      })
-      await updateCreditsCount({ email: customerEmail }, 10)
+      }
+      console.log(data)
+      await addPurchase(data)
+      await updateCreditsCount(gitId, 10)
       return NextResponse.json({ status: 200 })
     } else {
       throw Error("Error")
     }
   } catch (error) {
+    console.log(error)
     return NextResponse.json({ error }, { status: 400 })
   }
 }

@@ -4,7 +4,7 @@ import { users } from "../users/table"
 // Define the users table
 export const purchases = pgTable("purchases", {
   id: uuid("id").primaryKey().defaultRandom(),
-  email: text("email").references(() => users.email),
+  gitId: text("git_id").references(() => users.gitId),
   amount: integer("amount").default(10),
   status: text("status"),
   date: timestamp("date").notNull().defaultNow(),

@@ -7,7 +7,7 @@ const priceId = process.env.STRIPE_PRICE_ID!
 export const POST = async (req: NextRequest): Promise<NextResponse> => {
   const formData = await req.formData()
   const email = formData.get("email") as string
-
+  const gitId = formData.get("gitId") as string 
   try {
     // Create Checkout Sessions from body params.
     const session = await stripe.checkout.sessions.create({
@@ -22,6 +22,9 @@ export const POST = async (req: NextRequest): Promise<NextResponse> => {
       mode: "payment",
       success_url: `${req.headers.get("origin")}/credits?success=true`,
       cancel_url: `${req.headers.get("origin")}/credits?canceled=true`,
+      metadata: {
+        gitId: gitId, // Pass gitId as metadata
+      },
     })
 
     return NextResponse.redirect(`${session.url}`, 303) // Redirect to the Stripe session URL

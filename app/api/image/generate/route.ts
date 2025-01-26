@@ -8,11 +8,11 @@ import { NextRequest, NextResponse } from "next/server"
 
 export const POST = async (req: NextRequest): Promise<NextResponse> => {
   const data = await req.json()
-  const requestAlreadyInProgress = await checkIfRequestExists(data.email)
+  const requestAlreadyInProgress = await checkIfRequestExists(data.gitId)
   if (requestAlreadyInProgress) {
     return NextResponse.json({ requestAlreadyInProgress: true })
   }
-  await addRequest(data.email)
+  await addRequest(data.gitId)
   // check if user has enough credits to generate new image
   const creditsCount = await getCreditsCount(data)
   if (creditsCount === 0) {
@@ -28,8 +28,8 @@ export const POST = async (req: NextRequest): Promise<NextResponse> => {
   // add image to db
   if (url) {
     await addImage(data.gitId, url)
-    await updateCreditsCount(data, -1)
+    await updateCreditsCount(data.gitId, -1)
   }
-  await removeRequest(data.email)
+  await removeRequest(data.gitId)
   return NextResponse.json({ image: image })
 }
