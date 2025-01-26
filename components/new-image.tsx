@@ -24,7 +24,9 @@ const NewImage: FC<Props> = async ({ creditsCount }) => {
       <CardContent className="flex items-center justify-center">
         {hasCredits && (
           <Button asChild>
-            <Link prefetch href="/generate">{"Generate"}</Link>
+            <Link href="/generate" prefetch>
+              {"Generate"}
+            </Link>
           </Button>
         )}
       </CardContent>

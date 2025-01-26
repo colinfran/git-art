@@ -163,14 +163,14 @@ export const ImageProvider: FC<ImageProviderProps> = ({ children }) => {
       if (resp === "in progress") {
         triggerLoadingToast()
         setStatus("generating")
-        setImageData({requestAlreadyInProgress: true})
+        setImageData({ requestAlreadyInProgress: true })
       }
       if (resp === "done") {
         triggerDoneToast()
         router.refresh()
         setStatus("")
         setIsReloaded("")
-        setImageData({url: "refresh"})
+        setImageData({ url: "refresh" })
       }
     } catch (error) {
       console.error(error)

@@ -68,10 +68,10 @@ const Page: FC = () => {
 
   console.log("imageData", imageData)
 
-  useEffect(()=> {
+  useEffect(() => {
     // if the user refreshed the page on the generation page, do not show
     // both done toast and done message, just show done message.
-    if (imageData?.url === "refresh"){
+    if (imageData?.url === "refresh") {
       toast.dismiss("toast")
     }
   }, [imageData?.url])
@@ -79,7 +79,7 @@ const Page: FC = () => {
   return (
     <div className="mx-[2px] mt-2 flex flex-col items-center justify-center gap-8 p-8">
       <div className="flex justify-center">
-        {imageData ?  (
+        {imageData ? (
           <>
             {imageData?.error ? (
               <p className="text-center text-red-600">
@@ -87,15 +87,14 @@ const Page: FC = () => {
               </p>
             ) : (
               <div className="space-y-4">
-                {imageData?.outOfCredits ||
-                imageData?.requestAlreadyInProgress ? (
+                {imageData?.outOfCredits || imageData?.requestAlreadyInProgress ? (
                   <div className="text-center">
                     {imageData?.outOfCredits && "You have ran out of image generation credits."}
-                    {(imageData?.requestAlreadyInProgress) &&
+                    {imageData?.requestAlreadyInProgress &&
                       "There is currently an image being generated."}
                     <br />
                     {imageData?.outOfCredits && "Please purchase more credits and try again."}
-                    {(imageData?.requestAlreadyInProgress) &&
+                    {imageData?.requestAlreadyInProgress &&
                       "Please wait a minute to generate another image."}
                   </div>
                 ) : (
@@ -108,39 +107,36 @@ const Page: FC = () => {
                     </div>
                     {imageData?.url && (
                       <>
-                        {
-                          imageData?.url === "refresh" ? (
-                            <div>
-                              <div className="flex w-full flex-row items-center gap-4 p-4">
-                                <CheckCircle className="text-green-500" />
-                                <div className="flex w-full flex-row gap-4">
-                                  <div className="w-full">
-                                    <div className="mb-2 flex items-center space-x-2">
-                                      <span className="text-sm font-medium">Image generation has completed</span>
-                                    </div>
-                                    <p className="text-sm">View your git commit art!</p>
+                        {imageData?.url === "refresh" ? (
+                          <div>
+                            <div className="flex w-full flex-row items-center gap-4 p-4">
+                              <CheckCircle className="text-green-500" />
+                              <div className="flex w-full flex-row gap-4">
+                                <div className="w-full">
+                                  <div className="mb-2 flex items-center space-x-2">
+                                    <span className="text-sm font-medium">
+                                      Image generation has completed
+                                    </span>
                                   </div>
-                                  <Button className="self-center" asChild>
-                                    <Link
-                                      className="min-w-fit"
-                                      href="/images?new-image=true"
-                                    >
-                                      View
-                                    </Link>
-                                  </Button>
+                                  <p className="text-sm">View your git commit art!</p>
                                 </div>
+                                <Button className="self-center" asChild>
+                                  <Link className="min-w-fit" href="/images?new-image=true">
+                                    View
+                                  </Link>
+                                </Button>
                               </div>
                             </div>
-                          ) : (
-                            // eslint-disable-next-line @next/next/no-img-element
-                            <img
-                              alt="new generated art"
-                              className={`${loading ? "hidden" : ""} mx-auto size-[75vw] rounded-lg shadow-lg md:size-[75vh]`}
-                              src={imageData.url}
-                              onLoad={() => setLoading(false)}
-                            />
-                          )
-                        }
+                          </div>
+                        ) : (
+                          // eslint-disable-next-line @next/next/no-img-element
+                          <img
+                            alt="new generated art"
+                            className={`${loading ? "hidden" : ""} mx-auto size-[75vw] rounded-lg shadow-lg md:size-[75vh]`}
+                            src={imageData.url}
+                            onLoad={() => setLoading(false)}
+                          />
+                        )}
                       </>
                     )}
                   </>

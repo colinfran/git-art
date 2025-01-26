@@ -37,7 +37,9 @@ const ImageGridPagination: FC<Props> = ({ images }) => {
       {visibleImages.length === 0 && (
         <div className="text-center">
           <Button asChild>
-            <Link prefetch href="/generate">Generate your first image</Link>
+            <Link href="/generate" prefetch>
+              Generate your first image
+            </Link>
           </Button>
         </div>
       )}
