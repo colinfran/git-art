@@ -1,4 +1,4 @@
-import { eq, or, sql } from "drizzle-orm"
+import { eq, sql } from "drizzle-orm"
 import { users } from "./table"
 import { db } from "@/lib/db"
 import { User } from "next-auth"
@@ -15,11 +15,7 @@ type NewUser = {
 
 export const doesUserExist = async (user: NewUser): Promise<boolean | string> => {
   try {
-    const existingUser = await db
-      .select()
-      .from(users)
-      .where(eq(users.gitId, user.gitId!))
-      .limit(1)
+    const existingUser = await db.select().from(users).where(eq(users.gitId, user.gitId!)).limit(1)
     return existingUser && existingUser.length > 0
   } catch (error) {
     console.error("Error checking if user exists", error)
