@@ -21,7 +21,7 @@ export const POST = async (req: NextRequest): Promise<NextResponse> => {
   // if not generate new image
   const commits = await fetchCommitsForUser(data)
   // create prompt from commits
-  const prompt = createPrompt(commits)
+  const prompt = createPrompt(commits, data.options)
   // generate new image
   const image = await createImage(prompt)
   const url = await uploadImage(image.data[0].url)

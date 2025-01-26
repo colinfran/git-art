@@ -9,6 +9,7 @@ import { toast } from "react-toastify"
 import { useRouter } from "next/navigation"
 import useLocalStorage from "use-local-storage"
 import { useTheme } from "next-themes"
+import { ArtOptions } from "@/components/art-options-form"
 
 // Define types for context values
 interface ImageContextType {
@@ -16,7 +17,7 @@ interface ImageContextType {
   setLoading: (value: boolean) => void
   imageData: ImageDataProps
   setImageData: (value: ImageDataProps) => void
-  generateNewImage: () => Promise<void>
+  generateNewImage: (options: ArtOptions) => Promise<void>
 }
 
 const ImageContext = createContext<ImageContextType | undefined>(undefined)
@@ -25,12 +26,14 @@ interface ImageProviderProps {
   children: ReactNode
 }
 
-type ImageDataProps = {
-  url?: string
-  outOfCredits?: boolean
-  requestAlreadyInProgress?: boolean
-  error?: boolean
-}
+type ImageDataProps =
+  | {
+      url?: string
+      outOfCredits?: boolean
+      requestAlreadyInProgress?: boolean
+      error?: boolean
+    }
+  | undefined
 
 export const ImageProvider: FC<ImageProviderProps> = ({ children }) => {
   const { resolvedTheme } = useTheme()
@@ -113,14 +116,14 @@ export const ImageProvider: FC<ImageProviderProps> = ({ children }) => {
     })
   }
 
-  const generateNewImage = async (): Promise<void> => {
+  const generateNewImage = async (options: ArtOptions): Promise<void> => {
     try {
       setIsReloaded("")
       triggerLoadingToast()
       setImageData({ error: false })
       const response = await fetch("/api/image/generate", {
         method: "POST",
-        body: JSON.stringify({ ...session?.user }),
+        body: JSON.stringify({ ...session?.user, options }),
       })
       const result = await response.json()
       if (result?.requestAlreadyInProgress) {
