@@ -228,8 +228,8 @@ const ArtOptionsForm: FC<ArtOptionsFormProps> = ({ options, setOptions, onGenera
               <SelectValue placeholder="Select background type" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="gradient">Gradient</SelectItem>
               <SelectItem value="solid">Solid Color</SelectItem>
+              <SelectItem value="gradient">Gradient</SelectItem>
               <SelectItem value="pattern">Pattern</SelectItem>
               <SelectItem value="textured">Textured</SelectItem>
             </SelectContent>
