@@ -36,9 +36,6 @@ export const createPrompt = (commits: any, options: ArtOptions): string => {
     options.customElements.length > 0
       ? `incorporating elements of ${options.customElements.join(", ")}`
       : ""
-  const focusDateDescription = options.focusDate
-    ? `with emphasis on the date ${options.focusDate.toDateString()}`
-    : ""
   const textureDescription = `featuring a ${options.textureStyle} texture`
   const animationDescription =
     options.animationStyle !== "static" ? `with a ${options.animationStyle} animation style` : ""
@@ -48,7 +45,7 @@ export const createPrompt = (commits: any, options: ArtOptions): string => {
   return `${styleDescription} ${colorDescription}, ${themeDescription} and ${moodDescription}, 
   visualizing ${numberOfCommits} GitHub commits ${authorInfo} from ${firstCommitDate.toDateString()} to ${lastCommitDate.toDateString()}.
   The piece is ${complexityDescription}, with each commit ${timeRepresentation}, 
-  ${customElements} ${focusDateDescription}.
+  ${customElements} .
   The artwork is ${textureDescription} ${animationDescription}, ${backgroundDescription}, and ${perspectiveDescription}.
   This visual representation captures the progress and teamwork behind the development process, 
   turning the code into an evolving digital masterpiece.`
