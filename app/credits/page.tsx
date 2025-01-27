@@ -15,6 +15,7 @@ import { ShoppingCartIcon } from "lucide-react"
 import PurchaseAlert from "@/components/purchase-alert"
 import Link from "next/link"
 import { getAllPurchases } from "@/lib/db/purchases/tasks"
+// import { NumberField } from "@/components/ui/number-field"
 
 const Page: FC = async () => {
   const session = await auth()
@@ -35,23 +36,23 @@ const Page: FC = async () => {
         </Card>
 
         <Card>
-          <CardHeader>
-            <CardTitle>Purchase Credits</CardTitle>
-            <CardDescription className="text-xl">Get 10 credits for $10</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <p className="text-2xl font-semibold">Price: $10</p>
-          </CardContent>
-          <CardFooter>
-            <form action="/api/checkout" method="POST">
+          <form action="/api/checkout" method="POST">
+            <CardHeader>
+              <CardTitle>Purchase Credits</CardTitle>
+              <CardDescription className="text-xl">Get 10 credits for $10</CardDescription>
+            </CardHeader>
+            {/* <CardContent>
+                <NumberField />
+            </CardContent> */}
+            <CardFooter>
               <input name="email" type="hidden" value={session.user.email} />
               <input name="gitId" type="hidden" value={session.user.gitId} />
               <Button className="flex flex-row gap-2" type="submit">
                 <ShoppingCartIcon size={16} />
                 <span>Buy Now</span>
               </Button>
-            </form>
-          </CardFooter>
+            </CardFooter>
+          </form>
         </Card>
       </div>
       <PurchaseHistory purchaseHistory={purchaseHistory} />
