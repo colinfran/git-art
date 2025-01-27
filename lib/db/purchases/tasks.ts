@@ -8,7 +8,7 @@ export const addPurchase = async (data: any): Promise<void> => {
     await db.insert(purchases).values({
       gitId: data.gitId,
       email: data.email,
-      amount: 10,
+      amount: data.amount,
       status: data.status,
       sessionId: data.sessionId,
     })

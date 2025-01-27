@@ -23,14 +23,11 @@ export const POST = async (req: Request): Promise<NextResponse> => {
 
       // Extract session details to store in DB
       const customerEmail = session.customer_details?.email
-      const amountPaid = session.amount_total
+      const amountPaid = session.amount_total! / 100
       const paymentStatus = session.payment_status
       const sessionId = session.id
       const gitId = session.metadata!.gitId
-      const lineItems = await stripe.checkout.sessions.listLineItems(session.id, {
-        limit: 100, // or another appropriate limit if you have many items
-      });     
-      const quantity = lineItems.data.reduce((total, item) => total + (item.quantity ?? 0), 0);
+      console.log("amountPaid", amountPaid)
       const data = {
         gitId: gitId,
         email: customerEmail,
@@ -39,7 +36,7 @@ export const POST = async (req: Request): Promise<NextResponse> => {
         sessionId: sessionId,
       }
       await addPurchase(data)
-      await updateCreditsCount(gitId, 10 * quantity)
+      await updateCreditsCount(gitId, amountPaid!)
       return NextResponse.json({ status: 200 })
     } else {
       throw Error("Error")

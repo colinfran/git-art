@@ -40,7 +40,7 @@ const PurchaseAlert: FC = () => {
             Purchase Successful!
           </AlertDialogTitle>
           <AlertDialogDescription>
-            You have successfully purchsed 10 credits. Each credit allows you to create one unique
+            You have successfully purchsed credits. Each credit allows you to create one unique
             AI-generated artwork. Unleash your creativity and start generating amazing pieces!
           </AlertDialogDescription>
         </AlertDialogHeader>
