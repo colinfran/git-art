@@ -56,7 +56,16 @@ const Page: FC = async () => {
           </ul>
         </section>
         <section className="mb-8">
-          <h2 className="mb-4 text-2xl font-semibold">3. Data Security</h2>
+          <h2 className="mb-4 text-2xl font-semibold">3. Generated Images and Ownership</h2>
+          <p>
+            All images generated using the App are owned by GitArt. By using the App and generating
+            images, you acknowledge and agree that GitArt has the right to use, modify, distribute,
+            and publicly display these images without requiring additional permission from you. You
+            retain no ownership rights over these generated images.
+          </p>
+        </section>
+        <section className="mb-8">
+          <h2 className="mb-4 text-2xl font-semibold">4. Data Security</h2>
           <p>
             We take reasonable measures to protect your personal information from unauthorized
             access, use, or disclosure. However, no method of transmission over the internet or
@@ -64,7 +73,17 @@ const Page: FC = async () => {
           </p>
         </section>
         <section className="mb-8">
-          <h2 className="mb-4 text-2xl font-semibold">4. Your Rights</h2>
+          <h2 className="mb-4 text-2xl font-semibold">5. Refund Policy</h2>
+          <p>
+            If you wish to request a refund for credits purchased, please reach out to us via email
+            at <a href="mailto:hello@colinfran.com">hello@colinfran.com</a>. Refunds will be based
+            on the number of credits remaining after usage. For example, if you purchased 40 credits
+            (4 sets of 10 credits = $40) and used 8 credits, you would be refunded for the remaining
+            32 credits, which is equivalent to $32.
+          </p>
+        </section>
+        <section className="mb-8">
+          <h2 className="mb-4 text-2xl font-semibold">6. Your Rights</h2>
           <p>
             You have the right to access, update, or delete the information we have collected about
             you. If you wish to exercise any of these rights, please contact us using the
@@ -72,7 +91,7 @@ const Page: FC = async () => {
           </p>
         </section>
         <section className="mb-8">
-          <h2 className="mb-4 text-2xl font-semibold">5. Changes to This Privacy Policy</h2>
+          <h2 className="mb-4 text-2xl font-semibold">7. Changes to This Privacy Policy</h2>
           <p>
             We may update this privacy policy from time to time to reflect changes in our practices
             or for other operational, legal, or regulatory reasons. Any changes to this policy will
@@ -80,26 +99,23 @@ const Page: FC = async () => {
           </p>
         </section>
         <section className="mb-8">
-          <h2 className="mb-4 text-2xl font-semibold">6. Contact Us</h2>
+          <h2 className="mb-4 text-2xl font-semibold">8. Contact Us</h2>
           <p>
             If you have any questions or concerns about this privacy policy or how we handle your
             information, please contact us at:
           </p>
           <p>
             Email:{" "}
-            <a
-              className="text-blue-300 hover:text-blue-100"
-              href="mailto:hello@colinfran.com?subject=GitArt+Support"
-            >
+            <a className="underline" href="mailto:hello@colinfran.com?subject=GitArt+Support">
               hello@colinfran.com
             </a>
           </p>
         </section>
       </main>
-      <footer className="p-4 text-black">
+      <footer className="p-4">
         <div className="container mx-auto text-center">
           <p>&copy; {new Date().getFullYear()} GitArt. All rights reserved.</p>
-          <Link className="text-gray-600 hover:text-gray-500" href="/">
+          <Link className="underline" href="/">
             Back to Home
           </Link>
         </div>

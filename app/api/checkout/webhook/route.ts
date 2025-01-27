@@ -27,6 +27,7 @@ export const POST = async (req: Request): Promise<NextResponse> => {
       const paymentStatus = session.payment_status
       const sessionId = session.id
       const gitId = session.metadata!.gitId
+      const quanity = session.line_items!.data[0].quantity!
       const data = {
         gitId: gitId,
         email: customerEmail,
@@ -35,7 +36,7 @@ export const POST = async (req: Request): Promise<NextResponse> => {
         sessionId: sessionId,
       }
       await addPurchase(data)
-      await updateCreditsCount(gitId, 10)
+      await updateCreditsCount(gitId, 10 * quanity)
       return NextResponse.json({ status: 200 })
     } else {
       throw Error("Error")

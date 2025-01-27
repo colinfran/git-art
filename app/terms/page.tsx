@@ -32,7 +32,25 @@ const Page: FC = async () => {
           </p>
         </section>
         <section className="mb-8">
-          <h2 className="mb-4 text-2xl font-semibold">4. Disclaimers</h2>
+          <h2 className="mb-4 text-2xl font-semibold">4. Image Ownership and Usage Rights</h2>
+          <p>
+            {`By generating artwork through GitArt, you acknowledge and agree that all images produced
+            by the App are the property of GitArt. GitArt retains full ownership and all rights to the
+            images, including but not limited to the right to use, modify, distribute, or sell the images
+            without any further consent from you, the user. You will not have any ownership, claim, or
+            further rights over any image generated using the App.`}
+          </p>
+        </section>
+        <section className="mb-8">
+          <h2 className="mb-4 text-2xl font-semibold">5. Refund Policy</h2>
+          <p>
+            {`If you wish to request a refund, please reach out to us via email at hello@colinfran.com.
+            Refunds will be issued based on the amount of credits that have been used after the initial purchase.
+            For example, if you purchase 40 credits ($40) and use 8 credits, you will be refunded 32 credits ($32).`}
+          </p>
+        </section>
+        <section className="mb-8">
+          <h2 className="mb-4 text-2xl font-semibold">6. Disclaimers</h2>
           <p>
             {`The App and all content provided are delivered on an "as-is" basis. GitArt does not
             offer any warranties, either express or implied, including but not limited to the
@@ -40,7 +58,7 @@ const Page: FC = async () => {
           </p>
         </section>
         <section className="mb-8">
-          <h2 className="mb-4 text-2xl font-semibold">5. Limitation of Liability</h2>
+          <h2 className="mb-4 text-2xl font-semibold">7. Limitation of Liability</h2>
           <p>
             {`In no event shall GitArt be held liable for any damages, including but not limited to
             loss of data, profits, or business interruption, arising from your use or inability to
@@ -48,7 +66,7 @@ const Page: FC = async () => {
           </p>
         </section>
         <section className="mb-8">
-          <h2 className="mb-4 text-2xl font-semibold">6. Changes to Content</h2>
+          <h2 className="mb-4 text-2xl font-semibold">8. Changes to Content</h2>
           <p>
             {`GitArt may update, modify, or remove content from the App at any time without notice.
             While we strive for accuracy, GitArt does not guarantee that all information displayed
@@ -56,7 +74,7 @@ const Page: FC = async () => {
           </p>
         </section>
         <section className="mb-8">
-          <h2 className="mb-4 text-2xl font-semibold">7. Governing Law</h2>
+          <h2 className="mb-4 text-2xl font-semibold">9. Governing Law</h2>
           <p>
             {`These terms and conditions are governed by and construed in accordance with the laws of
             the State of California, USA. Any disputes related to these terms shall be resolved
@@ -64,10 +82,10 @@ const Page: FC = async () => {
           </p>
         </section>
       </main>
-      <footer className="p-4 text-black">
+      <footer className="p-4">
         <div className="container mx-auto text-center">
           <p>&copy; {new Date().getFullYear()} GitArt. All rights reserved.</p>
-          <Link className="text-gray-600 hover:text-gray-500" href="/">
+          <Link className="underline" href="/">
             Back to Home
           </Link>
         </div>

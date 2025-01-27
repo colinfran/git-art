@@ -16,6 +16,11 @@ export const POST = async (req: NextRequest): Promise<NextResponse> => {
         {
           price: priceId, // Use the provided Price ID from the request body
           quantity: 1,
+          adjustable_quantity: {
+            enabled: true,
+            minimum: 1,
+            maximum: 10,
+          },
         },
       ],
       customer_email: email,

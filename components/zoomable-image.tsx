@@ -7,6 +7,7 @@ import { Button } from "./ui/button"
 import { DownloadIcon, Loader2 } from "lucide-react"
 import uniqid from "uniqid"
 import { Skeleton } from "./ui/skeleton"
+import { DialogDescription } from "@radix-ui/react-dialog"
 
 type Props = ImageProps & {
   firstImageRef?: Ref<HTMLDivElement>
@@ -60,6 +61,7 @@ const ZoomableImage: FC<Props> = ({ src, alt, firstImageRef, ...props }) => {
               height: "auto",
             }}
             width={500}
+            priority
             onLoad={() => setImageLoading(false)}
           />
         </div>
@@ -70,6 +72,7 @@ const ZoomableImage: FC<Props> = ({ src, alt, firstImageRef, ...props }) => {
         onOpenAutoFocus={(e) => e.preventDefault()}
       >
         <DialogTitle className="sr-only">Image</DialogTitle>
+        <DialogDescription className="sr-only">Generated Image</DialogDescription>
         <div className="relative flex flex-col text-clip rounded-md bg-transparent">
           <Image
             {...props}
@@ -83,6 +86,7 @@ const ZoomableImage: FC<Props> = ({ src, alt, firstImageRef, ...props }) => {
               height: "auto",
             }}
             width={500}
+            priority
           />
         </div>
         <DialogFooter>
