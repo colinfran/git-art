@@ -44,11 +44,14 @@ const Page: FC = async () => {
         <section className="mb-8">
           <h2 className="mb-4 text-2xl font-semibold">5. Refund Policy</h2>
           <p>
-            If you wish to request a refund, please reach out to us via email at 
-            <a className="underline" href="mailto:hello@colinfran.com?subject=GitArt%20Support%20-%20Refund">
-              hello@colinfran.com"
-            </a>.
-            Refunds will be issued based on the amount of credits that have been used after the initial purchase.
+            {"If you wish to request a refund, please reach out to us via email at "}
+            <a
+              className="underline"
+              href="mailto:hello@colinfran.com?subject=GitArt%20Support%20-%20Refund"
+            >
+              hello@colinfran.com
+            </a>
+            {`. Refunds will be issued based on the amount of credits that have been used after the initial purchase.
             For example, if you purchase 40 credits ($40) and use 8 credits, you will be refunded 32 credits ($32).`}
           </p>
         </section>

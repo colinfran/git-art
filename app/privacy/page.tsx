@@ -76,10 +76,13 @@ const Page: FC = async () => {
           <h2 className="mb-4 text-2xl font-semibold">5. Refund Policy</h2>
           <p>
             If you wish to request a refund for credits purchased, please reach out to us via email
-            at <a href="mailto:hello@colinfran.com?subject=GitArt%20Support%20-%20Refund">hello@colinfran.com</a>. Refunds will be based
-            on the number of credits remaining after usage. For example, if you purchased 40 credits
-            (4 sets of 10 credits = $40) and used 8 credits, you would be refunded for the remaining
-            32 credits, which is equivalent to $32.
+            at{" "}
+            <a href="mailto:hello@colinfran.com?subject=GitArt%20Support%20-%20Refund">
+              hello@colinfran.com
+            </a>
+            . Refunds will be based on the number of credits remaining after usage. For example, if
+            you purchased 40 credits (4 sets of 10 credits = $40) and used 8 credits, you would be
+            refunded for the remaining 32 credits, which is equivalent to $32.
           </p>
         </section>
         <section className="mb-8">
@@ -101,8 +104,8 @@ const Page: FC = async () => {
         <section className="mb-8">
           <h2 className="mb-4 text-2xl font-semibold">8. Contact Us</h2>
           <p>
-            If you have any questions or concerns about this privacy policy or how we handle your
-            information, please contact us at:{" "}
+            {`If you have any questions or concerns about this privacy policy or how we handle your
+            information, please contact us at: `}
             <a className="underline" href="mailto:hello@colinfran.com?subject=GitArt%20Support">
               hello@colinfran.com
             </a>
