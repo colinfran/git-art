@@ -76,7 +76,7 @@ const Page: FC = async () => {
           <h2 className="mb-4 text-2xl font-semibold">5. Refund Policy</h2>
           <p>
             If you wish to request a refund for credits purchased, please reach out to us via email
-            at <a href="mailto:hello@colinfran.com">hello@colinfran.com</a>. Refunds will be based
+            at <a href="mailto:hello@colinfran.com?subject=GitArt%20Support%20-%20Refund">hello@colinfran.com</a>. Refunds will be based
             on the number of credits remaining after usage. For example, if you purchased 40 credits
             (4 sets of 10 credits = $40) and used 8 credits, you would be refunded for the remaining
             32 credits, which is equivalent to $32.
