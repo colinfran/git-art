@@ -101,11 +101,8 @@ const Page: FC = async () => {
         <section className="mb-8">
           <h2 className="mb-4 text-2xl font-semibold">8. Contact Us</h2>
           <p>
-            If you have any questions or concerns about this privacy policy or how we handle your
-            information, please contact us at:
-          </p>
-          <p>
-            Email:{" "}
+            {"If you have any questions or concerns about this privacy policy or how we handle your
+            information, please contact us at: "}
             <a className="underline" href="mailto:hello@colinfran.com?subject=GitArt%20Support">
               hello@colinfran.com
             </a>
