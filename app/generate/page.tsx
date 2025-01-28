@@ -26,7 +26,6 @@ const Page: FC = () => {
     theme: "technology",
     mood: "energetic",
     timeRepresentation: "linear",
-    customElements: [],
     textureStyle: "smooth",
     animationStyle: "static",
     backgroundType: "solid",

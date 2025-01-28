@@ -36,7 +36,6 @@ export interface ArtOptions {
   theme: string
   mood: string
   timeRepresentation: string
-  customElements: string[]
   textureStyle: string
   animationStyle: string
   backgroundType: string
@@ -159,21 +158,6 @@ const ArtOptionsForm: FC<ArtOptionsFormProps> = ({ options, setOptions, onGenera
               <SelectItem value="abstract">Abstract Time Flow</SelectItem>
             </SelectContent>
           </Select>
-        </div>
-
-        <div>
-          <Label htmlFor="customElements">Custom Elements (comma-separated)</Label>
-          <Input
-            id="customElements"
-            placeholder="e.g., stars, circuits, leaves"
-            value={options.customElements.join(", ")}
-            onChange={(e) =>
-              handleOptionChange(
-                "customElements",
-                e.target.value.split(",").map((item) => item.trim()),
-              )
-            }
-          />
         </div>
 
         <div>
