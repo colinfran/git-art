@@ -12,7 +12,6 @@ import uniqid from "uniqid"
 import ArtOptionsForm, { ArtOptions } from "@/components/art-options-form"
 import { toast } from "react-toastify"
 import Link from "next/link"
-import { delay } from "@/lib/utils"
 
 const Page: FC = () => {
   const { loading, setLoading, generateNewImage, imageData, setImageData } = useImage()
@@ -158,11 +157,7 @@ const Page: FC = () => {
             )}
           </>
         ) : (
-          <ArtOptionsForm
-            options={options}
-            setOptions={setOptions}
-            onGenerate={onGenerateClick}
-          />
+          <ArtOptionsForm options={options} setOptions={setOptions} onGenerate={onGenerateClick} />
         )}
       </div>
     </div>
