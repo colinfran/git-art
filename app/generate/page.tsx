@@ -15,7 +15,6 @@ import Link from "next/link"
 import { delay } from "@/lib/utils"
 
 const Page: FC = () => {
-  const [showSpinnerAtStart, setShowSpinnerAtStart] = useState(true)
   const { loading, setLoading, generateNewImage, imageData, setImageData } = useImage()
   const [_status, setStatus] = useLocalStorage("image-generation-status", "")
   const [_isReloaded, setIsReloaded] = useLocalStorage("reloaded", "")
@@ -72,114 +71,98 @@ const Page: FC = () => {
     }
   }, [imageData?.url])
 
-  useEffect(() => {
-    const waitAtStart = async (): Promise<void> => {
-      await delay(1500)
-      setShowSpinnerAtStart(false)
-    }
-    waitAtStart()
-  }, [])
-
   return (
     <div className="mx-[2px] mt-2 flex flex-col items-center justify-center gap-8 p-8">
       <div className="flex justify-center">
-        {showSpinnerAtStart ? (
-          <div className="mt-6">
-            <Loader2 className="animate-spin" size={32} />
-          </div>
-        ) : (
+        {imageData ? (
           <>
-            {imageData ? (
-              <>
-                {imageData?.error ? (
-                  <p className="text-center text-red-600">
-                    Failed to generate image. Please try again later.
-                  </p>
+            {imageData?.error ? (
+              <p className="text-center text-red-600">
+                Failed to generate image. Please try again later.
+              </p>
+            ) : (
+              <div className="space-y-4">
+                {imageData?.outOfCredits || imageData?.requestAlreadyInProgress ? (
+                  <div className="text-center">
+                    {imageData?.outOfCredits && "You have ran out of image generation credits."}
+                    {imageData?.requestAlreadyInProgress &&
+                      "There is currently an image being generated."}
+                    <br />
+                    {imageData?.outOfCredits && "Please purchase more credits and try again."}
+                    {imageData?.requestAlreadyInProgress &&
+                      "Please wait a minute to generate another image."}
+                  </div>
                 ) : (
-                  <div className="space-y-4">
-                    {imageData?.outOfCredits || imageData?.requestAlreadyInProgress ? (
-                      <div className="text-center">
-                        {imageData?.outOfCredits && "You have ran out of image generation credits."}
-                        {imageData?.requestAlreadyInProgress &&
-                          "There is currently an image being generated."}
-                        <br />
-                        {imageData?.outOfCredits && "Please purchase more credits and try again."}
-                        {imageData?.requestAlreadyInProgress &&
-                          "Please wait a minute to generate another image."}
+                  <>
+                    <div className={`${loading ? "" : "hidden"} relative`}>
+                      <Skeleton className="size-[75vw] md:size-[75vh]" />
+                      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+                        <Loader />
                       </div>
-                    ) : (
+                    </div>
+                    {imageData?.url && (
                       <>
-                        <div className={`${loading ? "" : "hidden"} relative`}>
-                          <Skeleton className="size-[75vw] md:size-[75vh]" />
-                          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-                            <Loader />
-                          </div>
-                        </div>
-                        {imageData?.url && (
-                          <>
-                            {imageData?.url === "refresh" ? (
-                              <div>
-                                <div className="flex w-full flex-row items-center gap-4 p-4">
-                                  <CheckCircle className="text-green-500" />
-                                  <div className="flex w-full flex-row gap-4">
-                                    <div className="w-full">
-                                      <div className="mb-2 flex items-center space-x-2">
-                                        <span className="text-sm font-medium">
-                                          Image generation has completed
-                                        </span>
-                                      </div>
-                                      <p className="text-sm">View your git commit art!</p>
-                                    </div>
-                                    <Button className="self-center" asChild>
-                                      <Link
-                                        className="min-w-fit"
-                                        href="/images?new-image=true"
-                                        onClick={() => toast.dismiss("toast")}
-                                      >
-                                        View
-                                      </Link>
-                                    </Button>
+                        {imageData?.url === "refresh" ? (
+                          <div>
+                            <div className="flex w-full flex-row items-center gap-4 p-4">
+                              <CheckCircle className="text-green-500" />
+                              <div className="flex w-full flex-row gap-4">
+                                <div className="w-full">
+                                  <div className="mb-2 flex items-center space-x-2">
+                                    <span className="text-sm font-medium">
+                                      Image generation has completed
+                                    </span>
                                   </div>
+                                  <p className="text-sm">View your git commit art!</p>
                                 </div>
+                                <Button className="self-center" asChild>
+                                  <Link
+                                    className="min-w-fit"
+                                    href="/images?new-image=true"
+                                    onClick={() => toast.dismiss("toast")}
+                                  >
+                                    View
+                                  </Link>
+                                </Button>
                               </div>
-                            ) : (
-                              // eslint-disable-next-line @next/next/no-img-element
-                              <img
-                                alt="new generated art"
-                                className={`${loading ? "hidden" : ""} mx-auto size-[75vw] rounded-lg shadow-lg md:size-[75vh]`}
-                                src={imageData.url}
-                                onLoad={() => setLoading(false)}
-                              />
-                            )}
-                          </>
+                            </div>
+                          </div>
+                        ) : (
+                          // eslint-disable-next-line @next/next/no-img-element
+                          <img
+                            alt="new generated art"
+                            className={`${loading ? "hidden" : ""} mx-auto size-[75vw] rounded-lg shadow-lg md:size-[75vh]`}
+                            src={imageData.url}
+                            onLoad={() => setLoading(false)}
+                          />
                         )}
                       </>
                     )}
-                    <div>
-                      <Button
-                        className={`mx-auto flex w-[200px] flex-row gap-2 ${imageData?.url && imageData.url !== "refresh" ? "" : "invisible"}`}
-                        disabled={loading && isLoading}
-                        onClick={handleDownload}
-                      >
-                        {isLoading ? (
-                          <Loader2 className="animate-spin" size={16} />
-                        ) : (
-                          <DownloadIcon size={16} />
-                        )}
-                        <span>Download</span>
-                      </Button>
-                    </div>
-                  </div>
+                  </>
                 )}
-              </>
-            ) : (
-              <ArtOptionsForm
-                options={options}
-                setOptions={setOptions}
-                onGenerate={onGenerateClick}
-              />
+                <div>
+                  <Button
+                    className={`mx-auto flex w-[200px] flex-row gap-2 ${imageData?.url && imageData.url !== "refresh" ? "" : "invisible"}`}
+                    disabled={loading && isLoading}
+                    onClick={handleDownload}
+                  >
+                    {isLoading ? (
+                      <Loader2 className="animate-spin" size={16} />
+                    ) : (
+                      <DownloadIcon size={16} />
+                    )}
+                    <span>Download</span>
+                  </Button>
+                </div>
+              </div>
             )}
           </>
+        ) : (
+          <ArtOptionsForm
+            options={options}
+            setOptions={setOptions}
+            onGenerate={onGenerateClick}
+          />
         )}
       </div>
     </div>
