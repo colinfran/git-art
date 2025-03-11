@@ -5,7 +5,6 @@ import Providers from "./providers"
 import { auth } from "@/lib/auth/index"
 import Header from "@/components/header"
 import NextTopLoader from "nextjs-toploader"
-// import { Toaster } from "@/components/ui/toaster"
 import { ToastContainer } from "react-toastify"
 
 type Props = {
@@ -46,8 +45,7 @@ const RootLayout: FC<Props> = async ({ children }) => {
         />
         <meta content="https://gitart.app" property="og:url" />
         <meta content="/ogimage-gitart.jpg" property="og:image" />
-        <meta content="/icon.png"  property="og:logo"/>
-
+        <meta content="/icon.png" property="og:logo" />
 
         {/* <!-- Twitter Card Meta Tags --> */}
         <meta content="summary_large_image" name="twitter:card" />
