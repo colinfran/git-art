@@ -1,8 +1,8 @@
-import { utapi } from "./init"
+import { uploadThing } from "./init"
 
 export const uploadImage = async (fileUrl: string): Promise<string | undefined> => {
   try {
-    const uploadedFile = await utapi.uploadFilesFromUrl(fileUrl)
+    const uploadedFile = await uploadThing.uploadFilesFromUrl(fileUrl)
     if (uploadedFile?.data?.url) {
       return uploadedFile.data.url
     } else {
