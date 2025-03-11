@@ -46,6 +46,8 @@ const RootLayout: FC<Props> = async ({ children }) => {
         />
         <meta content="https://gitart.app" property="og:url" />
         <meta content="/ogimage-gitart.jpg" property="og:image" />
+        <meta content="/icon.png"  property="og:logo"/>
+
 
         {/* <!-- Twitter Card Meta Tags --> */}
         <meta content="summary_large_image" name="twitter:card" />
