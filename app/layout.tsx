@@ -30,7 +30,7 @@ const RootLayout: FC<Props> = async ({ children }) => {
           name="description"
         />
         <meta
-          content="GitArt, GitHub contributions, visual GitHub activity, GitArt experience, visual art of GitHub, Git visualization, GitHub stats, artistic GitHub, explore Git contributions, GitHub journey"
+          content="GitArt, Git, Art, Git Art, gitart.app, GitHub contributions, visual GitHub activity, GitArt experience, visual art of GitHub, Git visualization, GitHub stats, artistic GitHub, explore Git contributions, GitHub journey"
           name="keywords"
         />
         <meta content="GitArt" name="author" />
