@@ -3,7 +3,6 @@
 import React, { createContext, useState, useContext, ReactNode, FC, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { CheckCircle, Loader2 } from "lucide-react"
-import { useSession } from "next-auth/react"
 import Link from "next/link"
 import { toast } from "react-toastify"
 import { useRouter } from "next/navigation"
@@ -40,7 +39,6 @@ export const ImageProvider: FC<ImageProviderProps> = ({ children }) => {
   const router = useRouter()
   const [loading, setLoading] = useState<boolean>(false) // For loading state
 
-  const { data: session } = useSession()
   const [imageData, setImageData] = useState<ImageDataProps>(undefined)
 
   const [status, setStatus] = useLocalStorage("image-generation-status", "")
@@ -124,7 +122,8 @@ export const ImageProvider: FC<ImageProviderProps> = ({ children }) => {
       setImageData({ error: false })
       const response = await fetch("/api/image/generate", {
         method: "POST",
-        body: JSON.stringify({ ...session?.user, options }),
+        // The server takes the user from the session; only the options are needed
+        body: JSON.stringify({ options }),
       })
       const result = await response.json()
       if (result?.requestAlreadyInProgress) {
@@ -155,10 +154,7 @@ export const ImageProvider: FC<ImageProviderProps> = ({ children }) => {
 
   const getStatus = async (): Promise<void> => {
     try {
-      const response = await fetch("/api/image/status", {
-        method: "POST",
-        body: JSON.stringify({ ...session?.user }),
-      })
+      const response = await fetch("/api/image/status", { method: "POST" })
       const { status: resp } = await response.json()
       if (resp === "in progress") {
         triggerLoadingToast()

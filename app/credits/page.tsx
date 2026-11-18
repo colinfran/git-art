@@ -45,8 +45,6 @@ const Page: FC = async () => {
                 <NumberField />
             </CardContent> */}
             <CardFooter>
-              <input name="email" type="hidden" value={session.user.email} />
-              <input name="gitId" type="hidden" value={session.user.gitId} />
               <Button className="flex flex-row gap-2" type="submit">
                 <ShoppingCartIcon size={16} />
                 <span>Buy Now</span>

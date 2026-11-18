@@ -6,6 +6,11 @@ import { auth } from "@/lib/auth/index"
 import Header from "@/components/header"
 import NextTopLoader from "nextjs-toploader"
 import { ToastContainer } from "react-toastify"
+import { BotIdClient } from "botid/client"
+
+// Requests BotID attaches its headers to. Each route here must call rejectBots()
+// from lib/auth/session.ts, and every route that calls it must be listed here.
+const botIdProtectedRoutes = [{ path: "/api/image/generate", method: "POST" }]
 
 type Props = {
   children: ReactNode
@@ -16,6 +21,7 @@ const RootLayout: FC<Props> = async ({ children }) => {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <BotIdClient protect={botIdProtectedRoutes} />
         <link href="/apple-icon-180x180.png" rel="apple-touch-icon" sizes="180x180" />
         <link href="/android-icon-192x192.png" rel="icon" sizes="192x192" type="image/png" />
         <link href="/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png" />

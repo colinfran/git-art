@@ -1,9 +1,15 @@
+import { getSessionUser, unauthorizedResponse } from "@/lib/auth/session"
 import { checkIfRequestExists } from "@/lib/db/requests/tasks"
-import { NextRequest, NextResponse } from "next/server"
+import { NextResponse } from "next/server"
 
-export const POST = async (req: NextRequest): Promise<NextResponse> => {
-  const data = await req.json()
-  const inProgress = await checkIfRequestExists(data.gitId)
+/**
+ * Reports whether the signed-in user has an image generation in progress.
+ */
+export const POST = async (): Promise<NextResponse> => {
+  const user = await getSessionUser()
+  if (!user) return unauthorizedResponse()
+
+  const inProgress = await checkIfRequestExists(user.gitId)
   if (inProgress) {
     return NextResponse.json({ status: "in progress" })
   }

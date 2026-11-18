@@ -1,20 +1,25 @@
+import { getSessionUser } from "@/lib/auth/session"
 import { NextRequest, NextResponse } from "next/server"
 import Stripe from "stripe"
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)!
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
 const priceId = process.env.STRIPE_PRICE_ID!
 
+/**
+ * Starts a Stripe checkout for credits for the signed-in user (submitted by the form on
+ * /credits). The gitId the webhook credits comes from the session, not the form.
+ */
 export const POST = async (req: NextRequest): Promise<NextResponse> => {
-  const formData = await req.formData()
-  const email = formData.get("email") as string
-  const gitId = formData.get("gitId") as string
+  const user = await getSessionUser()
+  if (!user) return NextResponse.redirect(new URL("/", req.url), 303)
+
+  const origin = req.headers.get("origin") || req.nextUrl.origin
   try {
-    // Create Checkout Sessions from body params.
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       line_items: [
         {
-          price: priceId, // Use the provided Price ID from the request body
+          price: priceId,
           quantity: 1,
           adjustable_quantity: {
             enabled: true,
@@ -23,17 +28,18 @@ export const POST = async (req: NextRequest): Promise<NextResponse> => {
           },
         },
       ],
-      customer_email: email,
+      customer_email: user.email || undefined,
       mode: "payment",
-      success_url: `${req.headers.get("origin")}/credits?success=true`,
-      cancel_url: `${req.headers.get("origin")}/credits?canceled=true`,
+      success_url: `${origin}/credits?success=true`,
+      cancel_url: `${origin}/credits?canceled=true`,
       metadata: {
-        gitId: gitId, // Pass gitId as metadata
+        gitId: user.gitId,
       },
     })
 
-    return NextResponse.redirect(`${session.url}`, 303) // Redirect to the Stripe session URL
+    return NextResponse.redirect(`${session.url}`, 303)
   } catch (error) {
-    return NextResponse.json({ error }, { status: 500 })
+    console.error("Error creating checkout session:", error)
+    return NextResponse.json({ error: "Could not start checkout" }, { status: 500 })
   }
 }

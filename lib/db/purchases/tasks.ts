@@ -17,6 +17,20 @@ export const addPurchase = async (data: any): Promise<void> => {
   }
 }
 
+/**
+ * Checks whether a Stripe checkout session has already been recorded as a purchase.
+ * @param {string} sessionId - The Stripe checkout session id.
+ * @returns {Promise<boolean>} True if a purchase with this session id exists.
+ */
+export const hasPurchase = async (sessionId: string): Promise<boolean> => {
+  const existing = await db
+    .select({ id: purchases.id })
+    .from(purchases)
+    .where(eq(purchases.sessionId, sessionId))
+    .limit(1)
+  return existing.length > 0
+}
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const getAllPurchases = async (data: any): Promise<any> => {
   const response = await db

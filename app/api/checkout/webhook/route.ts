@@ -1,48 +1,50 @@
-import { addPurchase } from "@/lib/db/purchases/tasks"
+import { addPurchase, hasPurchase } from "@/lib/db/purchases/tasks"
 import { updateCreditsCount } from "@/lib/db/users/tasks"
 import { NextResponse } from "next/server"
 import Stripe from "stripe"
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
 
+/**
+ * Stripe webhook. Adds credits when a checkout is completed and paid.
+ * Requests must carry a valid Stripe signature.
+ */
 export const POST = async (req: Request): Promise<NextResponse> => {
-  const signature = req.headers.get("stripe-signature")!
-  const body = await req.text() // Get the raw body to validate the webhook signature
+  const signature = req.headers.get("stripe-signature") || ""
+  const body = await req.text() // Raw body is needed to verify the signature
 
+  let event: Stripe.Event
   try {
-    // Verify the event using Stripe's secret
-    const event = stripe.webhooks.constructEvent(
-      body,
-      signature,
-      process.env.STRIPE_WEBHOOK_SECRET!,
-    )
-
-    // Handle the event: Only 'checkout.session.completed'
-    if (event.type === "checkout.session.completed") {
-      const session = event.data.object as Stripe.Checkout.Session
-
-      // Extract session details to store in DB
-      const customerEmail = session.customer_details?.email
-      const amountPaid = session.amount_total! / 100
-      const paymentStatus = session.payment_status
-      const sessionId = session.id
-      const gitId = session.metadata!.gitId
-      console.log("amountPaid", amountPaid)
-      const data = {
-        gitId: gitId,
-        email: customerEmail,
-        amount: amountPaid,
-        status: paymentStatus,
-        sessionId: sessionId,
-      }
-      await addPurchase(data)
-      await updateCreditsCount(gitId, amountPaid!)
-      return NextResponse.json({ status: 200 })
-    } else {
-      throw Error("Error")
-    }
+    event = stripe.webhooks.constructEvent(body, signature, process.env.STRIPE_WEBHOOK_SECRET!)
   } catch (error) {
-    console.log(error)
-    return NextResponse.json({ error }, { status: 400 })
+    console.error("Invalid Stripe webhook signature:", error)
+    return NextResponse.json({ error: "Invalid signature" }, { status: 400 })
   }
+
+  // Acknowledge other event types so Stripe doesn't keep retrying them.
+  if (event.type !== "checkout.session.completed") {
+    return NextResponse.json({ received: true })
+  }
+
+  const session = event.data.object as Stripe.Checkout.Session
+  const gitId = session.metadata?.gitId
+  if (session.payment_status !== "paid" || !gitId) {
+    return NextResponse.json({ received: true })
+  }
+
+  // Stripe can deliver the same event more than once; only credit each checkout once.
+  if (await hasPurchase(session.id)) {
+    return NextResponse.json({ received: true })
+  }
+
+  const amountPaid = (session.amount_total || 0) / 100
+  await addPurchase({
+    gitId,
+    email: session.customer_details?.email,
+    amount: amountPaid,
+    status: session.payment_status,
+    sessionId: session.id,
+  })
+  await updateCreditsCount(gitId, amountPaid)
+  return NextResponse.json({ received: true })
 }
